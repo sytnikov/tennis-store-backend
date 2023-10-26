@@ -1,16 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { z } from "zod"
 
-const productSchema = z.object({
-  body: z.object({
-    id: z.number({
-      required_error: "Id is required",
-    }),
-    name: z.string({
-      required_error: "Name is required",
-    }),
-  }),
-})
+import { requestSchema } from "../schemas/productSchema.js"
 
 export async function validateProduct(
   req: Request,
@@ -18,7 +9,7 @@ export async function validateProduct(
   next: NextFunction
 ) {
   try {
-    await productSchema.parseAsync({
+    await requestSchema.parseAsync({
       body: req.body,
       query: req.query,
       params: req.params,

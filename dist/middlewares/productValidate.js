@@ -7,21 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { z } from "zod";
-const productSchema = z.object({
-    body: z.object({
-        id: z.number({
-            required_error: "Id is required",
-        }),
-        name: z.string({
-            required_error: "Name is required",
-        }),
-    }),
-});
+import { requestSchema } from "../schemas/productSchema.js";
 export function validateProduct(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield productSchema.parseAsync({
+            yield requestSchema.parseAsync({
                 body: req.body,
                 query: req.query,
                 params: req.params,
