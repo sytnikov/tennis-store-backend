@@ -1,24 +1,23 @@
-import { ProductRepo } from "../models/Product.js"
+import mongoose, { ObjectId } from "mongoose"
+import ProductRepo from "../models/Product.js"
 import { Product } from "../types/products.js"
 
-const productsRepo = new ProductRepo()
-
-function findAll() {
-  const products = productsRepo.findAll()
+async function findAll() {
+  const products = await ProductRepo.find().exec()
 
   return products
 }
 
-function findOne(productId: number) {
-  const product = productsRepo.findOne(productId)
+async function findOne(productId: string) {
+  const id = new mongoose.Types.ObjectId(productId)
+  const product = await ProductRepo.findById(id)
 
   return product
 }
 
-function createOne(product: Product) {
-  const newProduct = productsRepo.createOne(product)
-
-  return newProduct
+async function createOne(product: Product) {
+  const newProduct = new ProductRepo(product)
+  return await newProduct.save()
 }
 
 export default {

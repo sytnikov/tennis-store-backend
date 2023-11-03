@@ -2,20 +2,21 @@ import { NextFunction, Request, Response } from "express"
 
 import ProductsService from "../services/productsService.js"
 import { ApiError } from "../errors/ApiError.js"
+import { ObjectId } from "mongoose"
 
-export function findAllProduct(_: Request, res: Response) {
-  const products = ProductsService.findAll()
+export async function findAllProduct(_: Request, res: Response) {
+  const products = await ProductsService.findAll()
 
   res.json({ products })
 }
 
-export function findOneProduct(
+export async function findOneProduct(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const productId = Number(req.params.productId)
-  const product = ProductsService.findOne(productId)
+  const productId = req.params.productId
+  const product = await ProductsService.findOne(productId)
 
   if (!product) {
     next(ApiError.resourceNotFound("Product not found."))
@@ -25,9 +26,9 @@ export function findOneProduct(
   res.json({ product })
 }
 
-export function createOneProduct(req: Request, res: Response) {
+export async function createOneProduct(req: Request, res: Response) {
   const newProduct = req.body
-  const product = ProductsService.createOne(newProduct)
+  const product = await ProductsService.createOne(newProduct)
 
   res.status(201).json({ product })
 }
