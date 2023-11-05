@@ -1,4 +1,6 @@
 import express from "express";
+import mongoose from "mongoose";
+import "dotenv/config";
 
 import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
@@ -12,6 +14,9 @@ const PORT = 8080;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const mongoURL = process.env.DB_URL as string;
+mongoose.connect(mongoURL).then(() => console.log("Connected!"));
 
 app.use("/products", loggingMiddleware, productsRouter);
 app.use("/categories", loggingMiddleware, categoriesRouter);

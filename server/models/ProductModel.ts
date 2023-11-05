@@ -1,7 +1,7 @@
 import { CreateProductInput } from "../types/CreateProductInput";
 import { Product } from "../types/Product";
 import { UpdateProductInput } from "../types/UpdateProductInput";
-import { CategoryRepo } from "./CategoryModel";
+import CategoryRepo from "./CategoryModel";
 
 export class ProductRepo {
   products = [
