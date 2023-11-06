@@ -9,6 +9,7 @@ export const updateProduct = async (
   next: NextFunction
 ) => {
   const id = req.params.id;
+  console.log("🚀 ~ file: updateProduct.ts:12 ~ id:", id)
   const updatedProduct = req.body;
   const product = await services.updateOne(updatedProduct, id);
   if (!product) {

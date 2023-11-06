@@ -1,13 +1,12 @@
-import { CategoryRepo } from "../models/CategoryModel";
-import { CreateProductInput } from "../types/CreateProductInput";
-import { UpdateProductInput } from "../types/UpdateProductInput";
+import CategoryRepo from "../models/CategoryModel";
 import ProductRepo from "../models/ProductModel";
+import { Category } from "../types/Category";
+import { CreateProductInput, UpdateProductInput } from "../types/Product";
 
 const createOne = async (newProduct: CreateProductInput) => {
-  const categoriesData = new CategoryRepo();
-  const category = categoriesData.categories.find(
-    (i) => i.id === newProduct.categoryId
-  );
+  const category: Category | null = await CategoryRepo.findOne({
+    _id: newProduct.categoryId,
+  });
   if (category) {
     delete newProduct.categoryId;
     newProduct.category = category;
@@ -43,7 +42,6 @@ const updateOne = async (
 
 export const findOne = async (productId: string) => {
   const product = await ProductRepo.findById(productId);
-
   return product;
 };
 
