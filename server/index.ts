@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const mongoURL = process.env.DB_URL_COMMON as string;
+const mongoURL = process.env.DB_URL as string;
 mongoose.connect(mongoURL).then(() => console.log("Connected!"));
 
 app.use("/products", loggingMiddleware, productsRouter);
