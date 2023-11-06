@@ -1,44 +1,46 @@
-import { CategoryRepo } from "../models/CategoryModel";
-import { CreateCategoryInput } from "../types/CreateCategoryInput";
-import { UpdateCategoryInput } from "../types/UpdateCategoryInput";
+import mongoose from "mongoose";
+import CategoryRepo from "../models/CategoryModel";
+import {
+  CreateCategoryInput,
+  UpdateCategoryInput,
+} from "../types/Category";
 
-const categoriesRepo = new CategoryRepo();
-
-function getAll() {
-  const categories = categoriesRepo.getAll();
-  return categories;
+async function getAll() {
+  return await CategoryRepo.find().exec();
 }
 
-function getSingle(categoryId: number) {
-  const category = categoriesRepo.getSingle(categoryId);
-  return category;
+async function getSingle(categoryId: string) {
+  const id = new mongoose.Types.ObjectId(categoryId);
+  return await CategoryRepo.findOne({ _id: id }).exec();
 }
 
-function getSingleByName(categoryName: string) {
-  const category = categoriesRepo.getSingleByName(categoryName);
-  return category;
+async function getSingleByName(categoryName: string) {
+  return await CategoryRepo.findOne({ name: categoryName }).exec();
 }
 
-function createCategory(createData: CreateCategoryInput) {
-  const newCategory = categoriesRepo.createCategory(createData);
-  return newCategory;
+async function createCategory(createData: CreateCategoryInput) {
+  const newCategory = new CategoryRepo(createData);
+  return await newCategory.save();
 }
 
-function updateCategory(id: number, updateData: UpdateCategoryInput) {
-  const updatedCategory = categoriesRepo.updateCategory(id, updateData)
-  return updatedCategory
+async function updateCategory(
+  categoryId: string,
+  updateData: UpdateCategoryInput
+) {
+  const id = new mongoose.Types.ObjectId(categoryId);
+  return await CategoryRepo.findByIdAndUpdate(id, updateData, { new: true });
 }
 
-function deleteCategory(id: number) {
-  const foundIndex = categoriesRepo.deleteCategory(id)
-  return foundIndex
+async function deleteCategory(categoryId: string) {
+  const id = new mongoose.Types.ObjectId(categoryId);
+  return await CategoryRepo.findByIdAndDelete(id);
 }
-  
+
 export default {
   getAll,
   getSingle,
   getSingleByName,
   createCategory,
   updateCategory,
-  deleteCategory
+  deleteCategory,
 };
