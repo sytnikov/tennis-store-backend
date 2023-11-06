@@ -1,4 +1,6 @@
 import express from "express";
+import mongoose from "mongoose";
+import "dotenv/config";
 
 import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
@@ -10,6 +12,7 @@ import { routeNotFound } from "./middlewares/routeNotFound";
 
 const PORT = 8080;
 const app = express();
+const mongoURL = process.env.DB_URL as string;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,7 +23,7 @@ app.use("/users", loggingMiddleware, usersRouter);
 
 app.use(apiErrorHandler);
 app.use(routeNotFound);
-
 app.listen(PORT, () => {
   console.log(`👀 Server is running on localhost:${PORT}`);
 });
+mongoose.connect(mongoURL).then(() => console.log("Connected!"));
