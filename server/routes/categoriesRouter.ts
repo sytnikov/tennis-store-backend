@@ -1,6 +1,6 @@
 import express from "express";
 
-import controller from "../controllers/categoriesController"
+import controller from "../controllers/categories"
 import { validate } from "../middlewares/validate";
 import { categorySchema } from "../schemas/categorySchema";
 

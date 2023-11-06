@@ -6,7 +6,7 @@ import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
 import ordersRouter from "./routes/ordersRouter";
 import usersRouter from "./routes/usersRouter";
-import { loggingMiddleware, monitorRequest } from "./middlewares/logging";
+import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
 import { routeNotFound } from "./middlewares/routeNotFound";
 
@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const mongoURL = process.env.DB_URL as string;
+const mongoURL = process.env.DB_URL_COMMON as string;
 mongoose.connect(mongoURL).then(() => console.log("Connected!"));
 
 app.use("/products", loggingMiddleware, productsRouter);

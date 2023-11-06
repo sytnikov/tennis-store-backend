@@ -15,5 +15,10 @@ export async function createCategory(
     return;
   }
   const newCategory = await categoriesService.createCategory(createData);
-  res.status(201).json(newCategory);
+  res
+    .status(201)
+    .json({
+      message: "Category successfully created",
+      newCategory: newCategory,
+    });
 }

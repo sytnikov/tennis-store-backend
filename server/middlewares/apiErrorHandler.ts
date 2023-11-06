@@ -8,7 +8,7 @@ export const apiErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  const paths = /^(\/products|\/categories|\/orders)/;
+  const paths = /^(\/products|\/categories|\/orders|\/users)/;
   if (error instanceof ApiError) {
     res.status(error.code).json({ message: error.message });
     return;
