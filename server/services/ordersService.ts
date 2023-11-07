@@ -1,32 +1,29 @@
-import { Order } from '../types/Order';
-import { OrderRepo } from '../models/OrderModel';
+import { Order, OrderDto, UpdateOrderInput } from '../types/Order';
+import OrderRepo from '../models/OrderModel';
+import mongoose from 'mongoose';
 
-const ordersRepo = new OrderRepo();
+const getOrders = async () => {
+  return await OrderRepo.find().exec();
+};
 
-function getOrders() {
-  const orders = ordersRepo.getAll();
-  return orders;
+const getSingleOrder = async (orderId: string) => {
+  const id = new mongoose.Types.ObjectId(orderId);
+  return await OrderRepo.findOne({ _id: id }).exec();
+};
+
+const createOrder = async (createData: OrderDto) => {
+  const newOrder = new OrderRepo(createData);
+  return await newOrder.save();
 }
 
-function getSingleOrder(orderId: number) {
-  const order = ordersRepo.getSingle(orderId);
-  return order;
+const updateOrder = async(orderId: string, updateOrder: UpdateOrderInput) => {
+  const id = new mongoose.Types.ObjectId(orderId);
+  return await OrderRepo.findByIdAndUpdate(id, updateOrder, {new: true});
 }
-
-function createOrder(createData: Order) {
-  const newOrder = ordersRepo.createOrder(createData);
-  return newOrder;
-}
-
-function removeOrder(orderId: number) {
-  const foundIndex = ordersRepo.deleteOrder(orderId);
-  return foundIndex;
-}
-
-function updateOrder(orderId: number, updatedOrder: Order) {
-  const foundIndex = ordersRepo.updateOrder(orderId, updatedOrder);
-  return foundIndex;
-}
+const removeOrder = async (orderId: string) => {
+  const id = new mongoose.Types.ObjectId(orderId);
+  return await OrderRepo.findByIdAndDelete(id);
+};
 
 export default {
   getOrders,
