@@ -8,12 +8,11 @@ export function createUser(
     res: Response,
     next: NextFunction
     ) {
-        const newUserData = req.body;
-        if (newUserData !== undefined && newUserData !== null) {
-            const newUser = usersService.createUser(newUserData);
-            res.status(200).json(newUser);
-        } else {
-            next(ApiError.badRequest("User can't be created"));
-            return;
+        try {
+            const user = usersService.createUser(req.body);
+            res.status(201).json({user, message: "User created"});
+        } catch (error) {
+            next(ApiError.resourceNotFound("Cannot add User"));
+
         }
 }
