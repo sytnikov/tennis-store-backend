@@ -1,10 +1,11 @@
-import { Category } from "./Category";
+import { z } from "zod";
+import mongoose from "mongoose";
+import { productBodySchema } from "../schemas/productSchema";
 
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  category: Category;
-  images: string[];
-}
+export type Product = z.infer<typeof productBodySchema> & {
+  id: mongoose.Types.ObjectId;
+};
+export type UpdateProductInput = Partial<Product>;
+export type CreateProductInput = Omit<Product, "id"> & {
+  categoryId?: mongoose.Types.ObjectId;
+};

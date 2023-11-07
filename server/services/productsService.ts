@@ -1,30 +1,47 @@
-import { ProductRepo } from "../models/ProductModel";
-import { CreateProductInput } from "../types/CreateProductInput";
-import { UpdateProductInput } from "../types/UpdateProductInput";
+import CategoryRepo from "../models/CategoryModel";
+import ProductRepo from "../models/ProductModel";
+import { Category } from "../types/Category";
+import { CreateProductInput, UpdateProductInput } from "../types/Product";
 
-const productsRepo = new ProductRepo();
-const createOne = (newProduct: CreateProductInput) => {
-  const product = productsRepo.createProduct(newProduct);
-  return product;
+const createOne = async (newProduct: CreateProductInput) => {
+  const category: Category | null = await CategoryRepo.findOne({
+    _id: newProduct.categoryId,
+  });
+  if (category) {
+    delete newProduct.categoryId;
+    newProduct.category = category;
+    const product = new ProductRepo(newProduct);
+    return await product.save();
+  }
+  return false;
 };
 
-const findAll = () => {
-  const products = productsRepo.getAll();
+const findAll = async () => {
+  const products = await ProductRepo.find().exec();
   return products;
 };
 
-const removeOne = (id: number) => {
-  const index = productsRepo.deleteProduct(id);
-  return index;
+const removeOne = async (productId: string) => {
+  const { deletedCount } = await ProductRepo.deleteOne({ _id: productId });
+  return deletedCount === 0 ? false : true;
 };
 
-const updateOne = (updatedProduct: UpdateProductInput, id: number) => {
-  const product = productsRepo.updateProduct(updatedProduct, id);
-  return product;
+const updateOne = async (
+  updatedProduct: UpdateProductInput,
+  productId: string
+) => {
+  const result = await ProductRepo.findByIdAndUpdate(
+    productId,
+    updatedProduct,
+    {
+      new: true,
+    }
+  );
+  return result;
 };
 
-export const findOne = (id: number) => {
-  const product = productsRepo.getProduct(id);
+export const findOne = async (productId: string) => {
+  const product = await ProductRepo.findById(productId);
   return product;
 };
 
