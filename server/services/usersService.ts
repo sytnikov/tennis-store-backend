@@ -1,34 +1,40 @@
-import { UserRepo } from "../models/UserModel";
+import mongoose from "mongoose";
+import UserRepo from "../models/UserModel";
 import { User, UserUpdate } from "../types/User";
 
-const usersRepo = new UserRepo();
+async function findAll() {
+    const users = await UserRepo.find({}).exec();
+    return users;
+}
 
-const getAllUsers = () => {
-    return usersRepo.getAll();
-};
-
-const getSingleUser = (userId: number) => {
-    const user = usersRepo.getSingle(userId);
+async function getSingleUser(index: string) {
+    const id = new mongoose.Types.ObjectId(index);
+    const user = await UserRepo.findById(id);
     return user;
-};
+}
 
-const createUser = (user: User) => {
-    const newUser = usersRepo.createUser(user);
+async function createUser(user: User) {
+    const newUser = new UserRepo(user);
+    await newUser.save();
     return newUser;
-};
+}
 
-const updateUser = (index: number, user: UserUpdate) => {
-    const updatedUser = usersRepo.updateUser(index, user)
-    return updatedUser
-};
+async function updateUser(index: string, user: UserUpdate) {
+    const updatedUser = await UserRepo.findOneAndUpdate(
+        { _id: index },
+        user,
+        { new: true }
+    );
+    return updatedUser;
+}
 
-const deleteUser = (index: number) => {
-    usersRepo.deleteUser(index)
-    return
-};
+async function deleteUser(index: string) {
+    const deletedUser = await UserRepo.findOneAndDelete({ _id: index });
+    return deletedUser;
+}
 
 export default {
-    getAllUsers,
+    findAll,
     getSingleUser,
     createUser,
     updateUser,
