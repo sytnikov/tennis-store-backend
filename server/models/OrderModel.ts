@@ -8,6 +8,9 @@ const orderSchema = new Schema({
       productId: Number,
       quantity: Number,
     },
+    {
+      versionKey: false,
+    },
   ],
 });
 
