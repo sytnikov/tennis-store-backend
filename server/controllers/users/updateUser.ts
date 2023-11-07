@@ -8,13 +8,12 @@ export function updateUser(
     res: Response,
     next: NextFunction
     ) {
-        const id = Number(req.params.userId);
-        const updatedData = req.body;
-        const updatedUser = usersService.updateUser(id, updatedData);
-        if (!updatedUser) {
-            next(ApiError.resourceNotFound("User can't be updated"));
+        const id = req.params.userId;
+        const updatedUser = req.body;
+        const user = usersService.updateUser(id, updatedUser);
+        if (!user) {
+            next(new ApiError(404, 'User not found'));
             return;
         }
-        
-        res.status(200).json(updatedUser);
+        res.status(200).json(user);
 }

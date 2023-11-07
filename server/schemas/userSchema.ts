@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
-export const userBodySchema = z.object({
-    id: z.number().default(1),
+export const userBodySchema = z.object({ 
     name: z.string()
     .min(3, { message:
         "Must be at least 3 characters long"
@@ -21,8 +20,21 @@ export const userBodySchema = z.object({
         message: "Must be at most 20 characters long"
     }),
     role: z.enum(['admin', 'user']),
-});
+})
+.strict();
+
+export const updatedUserBodySchema = z.object({
+        name: z.string().optional(),
+        email: z.string().email().optional(),
+        password: z.string().min(6).max(20).optional(),
+        role: z.enum(['admin', 'user']).optional(),
+}).partial().strict();
 
 export const userSchema = z.object({
     body: userBodySchema,
 });
+
+export const updateUserSchema = z.object({
+    body: updatedUserBodySchema,
+});
+

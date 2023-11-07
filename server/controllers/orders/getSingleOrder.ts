@@ -3,17 +3,17 @@ import { NextFunction, Request, Response } from 'express';
 import { ApiError } from '../../middlewares/errors/ApiError';
 import ordersService from '../../services/ordersService';
 
-export const getSingleOrder = (
+export const getSingleOrder = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const orderId = Number(req.params.id);
-  const order = ordersService.getSingleOrder(orderId);
+  const orderId = req.params.id;
+  const order = await ordersService.getSingleOrder(orderId);
 
-  if (order) {
-    res.status(200).json(order);
+  if (!order) {
+    next(ApiError.resourceNotFound('Order not found'));
     return;
   }
-  next(ApiError.resourceNotFound('Order not found'));
+  res.status(200).json(order);
 };

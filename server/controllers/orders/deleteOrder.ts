@@ -3,17 +3,18 @@ import { NextFunction, Request, Response } from 'express';
 import ordersService from '../../services/ordersService';
 import { ApiError } from '../../middlewares/errors/ApiError';
 
-export const deleteOrder = (
+export const deleteOrder = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const orderId = Number(req.params.id);
-  const foundIndex = ordersService.removeOrder(orderId);
+  const orderId = req.params.id;
+  const foundIndex = await ordersService.removeOrder(orderId);
 
-  if (foundIndex !== -1) {
-    res.status(200).json({ message: 'Order deleted successfully' });
+  if (foundIndex === null) {
+    next(ApiError.resourceNotFound('Order not found'));
     return;
   }
-  next(ApiError.resourceNotFound('Order is not found'));
+
+  res.status(200).json({ message: 'Order deleted successfully' });
 };
