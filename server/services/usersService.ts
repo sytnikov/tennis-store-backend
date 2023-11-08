@@ -3,7 +3,7 @@ import UserRepo from "../models/UserModel";
 import { User, UserUpdate } from "../types/User";
 
 async function findAll() {
-    const users = await UserRepo.find({}).exec();
+    const users = await UserRepo.find().exec();
     return users;
 }
 
