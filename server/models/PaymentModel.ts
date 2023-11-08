@@ -10,14 +10,6 @@ const PaymentSchema = new Schema(
     },
     method: {
       type: String,
-      enum: [
-        "Credit Card",
-        "PayPal",
-        "Bank Transfer",
-        "Stripe",
-        "Cash",
-        "Apple Pay",
-      ],
     },
     orderId: {
       type: Schema.Types.ObjectId,
