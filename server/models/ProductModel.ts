@@ -6,13 +6,10 @@ const ProductSchema = new Schema(
     description: String,
     price: Number,
     images: [{ type: String }],
-    category: [
-      {
-        id: Number,
-        name: String,
-        images: [String],
-      },
-    ],
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "categories",
+    },
     stock: Number,
   },
   {
