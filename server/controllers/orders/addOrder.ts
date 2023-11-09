@@ -9,7 +9,7 @@ export const addOrder = async (
   next: NextFunction
 ) => {
   const newOrder = req.body;
-  const order = await ordersService.createOrder(newOrder);
+  const order = await ordersService.addOrder(newOrder);
 
   if (!order) {
     next(ApiError.badRequest('Not a valid data'));
