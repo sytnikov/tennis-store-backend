@@ -13,7 +13,9 @@ export const productBodySchema = z
     price: z.number({
       required_error: "Price is required",
     }),
-    category: categoryBodySchema,
+    categoryId: z
+      .string()
+      .refine((val) => mongoose.Types.ObjectId.isValid(val)),
     images: z.array(
       z.string({
         required_error: "Images are required",
@@ -37,13 +39,4 @@ export const uptadeProductSchema = z.object({
 
 export const productSchema = z.object({
   body: productBodySchema
-  .merge(
-    z.object({
-      categoryId: z
-        .string()
-        .refine((val) => mongoose.Types.ObjectId.isValid(val)),
-      category: z.undefined(),
-    })
-  )
-  .strict(),
 });

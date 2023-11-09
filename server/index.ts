@@ -5,10 +5,11 @@ import "dotenv/config";
 import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
 import ordersRouter from "./routes/ordersRouter";
+import paymentsRouter from "./routes/paymentsRouter";
 import usersRouter from "./routes/usersRouter";
 import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
-import { routeNotFound } from "./middlewares/routeNotFound";
+import { routeNotFound } from "./middlewares/routeNotFound"; 
 
 const PORT = 8080;
 const app = express();
@@ -22,6 +23,7 @@ app.use("/products", loggingMiddleware, productsRouter);
 app.use("/categories", loggingMiddleware, categoriesRouter);
 app.use("/orders", loggingMiddleware, ordersRouter);
 app.use("/users", loggingMiddleware, usersRouter);
+app.use("/payments", loggingMiddleware, paymentsRouter);
 
 app.use(apiErrorHandler);
 app.use(routeNotFound);
