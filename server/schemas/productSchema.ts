@@ -33,30 +33,17 @@ export const uptadeProductSchema = z.object({
     .strict(),
 });
 
-export const createProductBodySchema = z
-  .object({
-    name: z.string({
-      required_error: "Name is required",
-    }),
-    description: z.string({
-      required_error: "Description is required",
-    }),
-    price: z.number({
-      required_error: "Price is required",
-    }),
-    categoryId: z
-      .string()
-      .refine((val) => {
-        return mongoose.Types.ObjectId.isValid(val);
-      }),
-    images: z.array(
-      z.string({
-        required_error: "Images are required",
-      })
-    ),
-  })
-  .strict();
+
 
 export const productSchema = z.object({
-  body: createProductBodySchema,
+  body: productBodySchema
+  .merge(
+    z.object({
+      categoryId: z
+        .string()
+        .refine((val) => mongoose.Types.ObjectId.isValid(val)),
+      category: z.undefined(),
+    })
+  )
+  .strict(),
 });

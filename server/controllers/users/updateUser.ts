@@ -15,5 +15,5 @@ export function updateUser(
             next(new ApiError(404, 'User not found'));
             return;
         }
-        res.status(200).json(user);
+        res.status(200).json({user, message: 'User updated'});
 }
