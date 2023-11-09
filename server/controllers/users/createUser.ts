@@ -13,6 +13,5 @@ export function createUser(
             res.status(201).json({user, message: "User created"});
         } catch (error) {
             next(ApiError.resourceNotFound("Cannot add User"));
-
         }
 }
