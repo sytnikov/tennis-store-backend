@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import PaymentRepo from "../../models/PaymentModel";
 import mongoose from "mongoose";
 
-export const addPayment = async (
+export const getPayment = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -16,7 +16,7 @@ export const addPayment = async (
     userId: mongoose.Types.ObjectId;
     orderId: mongoose.Types.ObjectId;
     method: string;
-    status: string
+    status: string;
   } = req.body;
   const payment = new PaymentRepo({
     userId,
@@ -27,5 +27,4 @@ export const addPayment = async (
   await payment.save();
 
   res.status(201).json({ message: "Payment is created", payment });
-  
 };

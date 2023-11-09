@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { z } from "zod";
-import { categoryBodySchema } from "./categorySchema";
 
 export const productBodySchema = z
   .object({

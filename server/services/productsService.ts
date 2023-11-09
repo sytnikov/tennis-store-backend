@@ -8,8 +8,6 @@ const createOne = async (newProduct: CreateProductInput) => {
     _id: newProduct.categoryId,
   });
   if (category) {
-    delete newProduct.categoryId;
-    newProduct.category = category;
     const product = new ProductRepo(newProduct);
     return await product.save();
   }
