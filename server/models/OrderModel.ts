@@ -9,6 +9,11 @@ const orderSchema = new Schema(
       ref: "User",
     },
     totalAmount: Number,
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "completed", "failed", "refunded"],
+      default: "pending",
+    },
   },
   {
     versionKey: false,

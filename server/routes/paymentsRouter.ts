@@ -6,9 +6,8 @@ import { paymentSchema } from "../schemas/paymentSchema";
 
 const router = express.Router();
 router.get("/", ctrl.getAllPayments);
-router.post("/", validate(paymentSchema), (ctrl.addPayment));
+router.post("/", validate(paymentSchema), ctrl.addPayment);
 router.get("/:paymentId", ctrl.getPayment);
 router.delete("/:paymentId", ctrl.removePayment);
-
 
 export default router;
