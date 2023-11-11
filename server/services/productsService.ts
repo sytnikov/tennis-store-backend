@@ -19,8 +19,7 @@ const findAll = async () => {
 };
 
 const removeOne = async (productId: string) => {
-  const { deletedCount } = await ProductRepo.deleteOne({ _id: productId });
-  return deletedCount === 0 ? false : true;
+  return await ProductRepo.findByIdAndDelete(productId);
 };
 
 const updateOne = async (
