@@ -3,9 +3,9 @@ import { NextFunction, Request, Response } from "express";
 import usersService from "../../services/usersService";
 import { ApiError } from "../../middlewares/errors/ApiError";
 
-export function deleteUser(req: Request, res: Response, next: NextFunction) {
+export async function deleteUser(req: Request, res: Response, next: NextFunction) {
   const id = req.params.userId;
-  const usersData = usersService.getSingleUser(id);
+  const usersData = await usersService.getSingleUser(id);
   if (!usersData) {
     next(ApiError.resourceNotFound("User can't be deleted"));
     return;

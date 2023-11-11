@@ -8,7 +8,7 @@ const orderSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    totalAmount: Number
+    totalAmount: Number,
   },
   {
     versionKey: false,

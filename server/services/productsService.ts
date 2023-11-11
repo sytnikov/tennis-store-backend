@@ -8,8 +8,6 @@ const createOne = async (newProduct: CreateProductInput) => {
     _id: newProduct.categoryId,
   });
   if (category) {
-    delete newProduct.categoryId;
-    newProduct.category = category;
     const product = new ProductRepo(newProduct);
     return await product.save();
   }
@@ -17,8 +15,7 @@ const createOne = async (newProduct: CreateProductInput) => {
 };
 
 const findAll = async () => {
-  const products = await ProductRepo.find().exec();
-  return products;
+  return await ProductRepo.find().exec();
 };
 
 const removeOne = async (productId: string) => {
@@ -40,7 +37,7 @@ const updateOne = async (
   return result;
 };
 
-export const findOne = async (productId: string) => {
+ const findOne = async (productId: string) => {
   const product = await ProductRepo.findById(productId);
   return product;
 };

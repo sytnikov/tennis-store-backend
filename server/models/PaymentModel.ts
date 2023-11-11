@@ -6,21 +6,20 @@ const PaymentSchema = new Schema(
   {
     status: {
       type: String,
-      enum: ["Pending", "Processed", "Failed"],
+      enum: ["pending", "completed", "failed"],
     },
     method: {
       type: String,
+      enum: ["credit_card", "bank_transfer", "paypal"],
     },
     orderId: {
       type: Schema.Types.ObjectId,
       ref: "Order",
     },
-    userId: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     versionKey: false,
