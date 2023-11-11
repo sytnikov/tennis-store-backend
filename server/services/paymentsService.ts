@@ -26,10 +26,12 @@ const createOne = async (newPayment: Payment) => {
           orderId: order._id,
           status: "completed",
         });
+        await createdPayment.save();
         await OrderRepo.findByIdAndUpdate(order._id, {
           paymentStatus: "success",
+          paymentId: createdPayment._id,
         });
-        return await createdPayment.save();
+        return createdPayment;
       }
     })
   );

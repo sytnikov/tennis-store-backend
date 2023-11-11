@@ -14,6 +14,10 @@ const orderSchema = new Schema(
       enum: ["pending", "completed", "failed", "refunded"],
       default: "pending",
     },
+    paymentId: {
+      type: Schema.Types.ObjectId,
+      ref: "Payment",
+    },
   },
   {
     versionKey: false,
