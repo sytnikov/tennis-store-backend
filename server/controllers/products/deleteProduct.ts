@@ -8,7 +8,7 @@ export const deleteProduct = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req.params.id;
+  const id = req.params.productId;
   const deleted = await services.removeOne(id);
   if (!deleted) {
     next(ApiError.resourceNotFound("Product id is not found"));

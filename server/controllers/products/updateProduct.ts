@@ -8,7 +8,7 @@ export const updateProduct = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req.params.id;
+  const id = req.params.productId;
   const updatedProduct = req.body;
   const product = await services.updateOne(updatedProduct, id);
   if (!product) {
