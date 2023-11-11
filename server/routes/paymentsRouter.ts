@@ -1,9 +1,12 @@
 import express from "express";
 
 import ctrl from "../controllers/payments";
+import { validate } from "../middlewares/validate";
+import { paymentSchema } from "../schemas/paymentSchema";
 
 const router = express.Router();
-router.post("/", (ctrl.addPayment));
+router.get("/", ctrl.getAllPayments);
+router.post("/", validate(paymentSchema), (ctrl.addPayment));
 router.get("/:id", ctrl.getPayment);
 router.delete("/:id", ctrl.removePayment);
 

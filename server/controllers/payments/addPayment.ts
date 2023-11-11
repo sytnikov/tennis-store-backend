@@ -1,31 +1,18 @@
 import { NextFunction, Request, Response } from "express";
 
-import PaymentRepo from "../../models/PaymentModel";
-import mongoose from "mongoose";
+import paymentsService from "../../services/paymentsService";
+import { ApiError } from "../../middlewares/errors/ApiError";
 
 export const addPayment = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const {
-    userId,
-    orderId,
-    method,
-  }: {
-    userId: mongoose.Types.ObjectId;
-    orderId: mongoose.Types.ObjectId;
-    method: string;
-    status: string
-  } = req.body;
-  const payment = new PaymentRepo({
-    userId,
-    orderId,
-    status: "pending",
-    method,
-  });
-  await payment.save();
-
+  const newPayment = req.body;
+  const payment = await paymentsService.createOne(newPayment);
+  if (payment === null || payment.length === 0) {
+    next(ApiError.badRequest("Payment not created"));
+    return;
+  }
   res.status(201).json({ message: "Payment is created", payment });
-  
 };
