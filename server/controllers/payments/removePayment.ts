@@ -8,7 +8,7 @@ export const removePayment = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req.params.id;
+  const id = req.params.paymentId;
   const payment = await paymentsService.removeOne(id);
   if (payment === null) {
     next(ApiError.resourceNotFound("Payment id not found"));

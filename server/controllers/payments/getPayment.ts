@@ -8,7 +8,7 @@ export const getPayment = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req.params.id;
+  const id = req.params.paymentId;
   const payment = await paymentsService.findOne(id);
   if (payment === null) {
     next(ApiError.resourceNotFound("Payment not found"));
