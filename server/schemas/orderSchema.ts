@@ -14,7 +14,9 @@ export const newOrderBodySchema = z.object({
   userId: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val)),
   products: z.array(
     z.object({
-      productId: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val)),
+      productId: z
+        .string()
+        .refine((val) => mongoose.Types.ObjectId.isValid(val)),
       quantity: z.number(),
     })
   ),

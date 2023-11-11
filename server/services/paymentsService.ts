@@ -26,6 +26,9 @@ const createOne = async (newPayment: Payment) => {
           orderId: order._id,
           status: "completed",
         });
+        await OrderRepo.findByIdAndUpdate(order._id, {
+          paymentStatus: "success",
+        });
         return await createdPayment.save();
       }
     })

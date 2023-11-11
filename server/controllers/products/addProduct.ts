@@ -3,7 +3,11 @@ import { NextFunction, Request, Response } from "express";
 import services from "../../services/productsService";
 import { ApiError } from "../../middlewares/errors/ApiError";
 
-export const addProduct = async (req: Request, res: Response, next: NextFunction) => {
+export const addProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const newProduct = req.body;
   const product = await services.createOne(newProduct);
   if (!product) {
@@ -13,5 +17,5 @@ export const addProduct = async (req: Request, res: Response, next: NextFunction
   res.status(201).json({
     message: "Product successfully created",
     product,
-  });;
+  });
 };
