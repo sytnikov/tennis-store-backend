@@ -11,7 +11,7 @@ export async function getOneShipment(
     try {
         const id = req.body.shipmentId;
         const isShipmentExisted = await shipmentsService.getOneShipment(id);
-        if (!isShipmentExisted){
+        if (!isShipmentExisted || isShipmentExisted === undefined){
             next(ApiError.resourceNotFound("Shipment not found"));
             return;
         }

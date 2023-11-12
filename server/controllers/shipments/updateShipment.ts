@@ -11,8 +11,12 @@ export async function updateShipment(
     try {
         const id = req.params.shipmentId;
         const updatedShipment = req.body;
-        const shipment = shipmentsService.updateShipment(id, updatedShipment);
-        
+        const shipment = await shipmentsService.updateShipment(id, updatedShipment);
+        if (!shipment || shipment === undefined){
+            next(ApiError.resourceNotFound("Shipment not found"));
+            return;
+        }
+        res.status(200).json({ shipment, message: "Shipment updated" });
     } catch (error) {
         next(ApiError.resourceNotFound("Cannot find Shipment"));
 

@@ -10,6 +10,10 @@ export async function getAllShipments(
     ) {
     try {
         const shipments = await ShipmentsService.findAll();
+        if (!shipments || shipments === undefined) {
+            next(ApiError.resourceNotFound("Shipments not found"));
+            return;
+        }
         res.status(200).json({ shipments });
     } catch (error) {
         next(ApiError.resourceNotFound("Shipment not found"));

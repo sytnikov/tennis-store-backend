@@ -3,17 +3,17 @@ import { Request, Response, NextFunction } from 'express';
 import shipmentsService from '../../services/shipmentsService';
 import { ApiError } from '../../middlewares/errors/ApiError';
 
-export function deleteShipment(
+export async function deleteShipment(
     req: Request,
     res: Response,
     next: NextFunction
     ) {
         const id = req.params.shipmentId;
-        const shipmentsData = shipmentsService.getOneShipment(id);
-        if (!shipmentsData) {
+        const shipmentsData = await shipmentsService.getOneShipment(id);
+        if (!shipmentsData || shipmentsData === undefined) {
             next(ApiError.resourceNotFound("Shipment can't be deleted"));
             return;
         }
-        shipmentsService.deleteShipment(id);
+        await shipmentsService.deleteShipment(id);
         res.status(200).json({ message: "Shipment deleted" });
 }
