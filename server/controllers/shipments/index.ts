@@ -4,7 +4,7 @@ import { getOneShipment } from "./getOneShipment";
 import { updateShipment } from "./updateShipment";
 import { deleteShipment } from "./deleteShipment";
 
-export const shipmentsController = {
+export default {
     addShipment,
     getAllShipments,
     getOneShipment,
