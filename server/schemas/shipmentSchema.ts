@@ -9,7 +9,6 @@ export const shipmentBodySchema = z.object({
     postalCode: z.string(),
     country: z.string(),
     shippingPrice: z.number(),
-    status: z.enum(['Pending', 'Shipped', 'Delivered'])
 }).strict();
 
 export const shipmentSchema = z.object({
