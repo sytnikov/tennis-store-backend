@@ -18,7 +18,7 @@ async function createShipment(shipment: any) {
     return newShipment;
 }
 
-async function updateShipment(shipment: any) {
+async function updateShipment(index: string, shipment: any) {
     const updatedShipment = await ShipmentRepo.findByIdAndUpdate(
         {
             _id: shipment.id,
