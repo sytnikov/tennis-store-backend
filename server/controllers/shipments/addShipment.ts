@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import shipmentsService from '../../services/shipmentsService';
 import { ApiError } from '../../middlewares/errors/ApiError';
 
-export function createShipment(
+export function addShipment(
     req: Request,
     res: Response,
     next: NextFunction
