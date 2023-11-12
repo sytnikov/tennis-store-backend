@@ -4,6 +4,7 @@ import { z } from "zod";
 export const shipmentBodySchema = z.object({
     userId: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val)),
     orderId: z.array(z.string().refine((val) => mongoose.Types.ObjectId.isValid(val))),
+    paymentId: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val)),
     address: z.string(),
     city: z.string(),
     postalCode: z.string(),

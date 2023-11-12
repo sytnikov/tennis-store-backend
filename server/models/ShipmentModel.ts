@@ -18,23 +18,19 @@ const ShipmentSchema = new Schema({
             enum: ["pending", "shipped", "delivered"],
             default: "pending",
         },
-        shippingAddress: {
+        address: {
             type: String,
             required: true,
         },
-        shippingCity: {
+        city: {
             type: String,
             required: true,
         },
-        shippingState: {
+        postalCode: {
             type: String,
             required: true,
         },
-        shippingZip: {
-            type: String,
-            required: true,
-        },
-        shippingCountry: {
+        country: {
             type: String,
             required: true,
         },

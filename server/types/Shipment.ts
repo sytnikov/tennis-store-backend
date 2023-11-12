@@ -9,3 +9,5 @@ export type Shipment = z.infer<typeof shipmentSchema> & {
     createdAt: Date;
     updatedAt: Date;
 };
+
+export type shipmentUpdate = Partial<Shipment>;
