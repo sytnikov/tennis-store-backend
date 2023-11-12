@@ -6,6 +6,7 @@ import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
 import ordersRouter from "./routes/ordersRouter";
 import usersRouter from "./routes/usersRouter";
+import shipmentsRouter from "./routes/shipmentsRouter";
 import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
 import { routeNotFound } from "./middlewares/routeNotFound";
@@ -22,6 +23,7 @@ app.use("/products", loggingMiddleware, productsRouter);
 app.use("/categories", loggingMiddleware, categoriesRouter);
 app.use("/orders", loggingMiddleware, ordersRouter);
 app.use("/users", loggingMiddleware, usersRouter);
+app.use("/shipments", loggingMiddleware, shipmentsRouter);
 
 app.use(apiErrorHandler);
 app.use(routeNotFound);
