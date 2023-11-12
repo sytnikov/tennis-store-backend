@@ -18,6 +18,35 @@ const ShipmentSchema = new Schema({
             enum: ["pending", "shipped", "delivered"],
             default: "pending",
         },
+        shippingAddress: {
+            type: String,
+            required: true,
+        },
+        shippingCity: {
+            type: String,
+            required: true,
+        },
+        shippingState: {
+            type: String,
+            required: true,
+        },
+        shippingZip: {
+            type: String,
+            required: true,
+        },
+        shippingCountry: {
+            type: String,
+            required: true,
+        },
+        shippingPrice: {
+            type: Number,
+            required: true,
+            default: 0.0,
+        },
+        paymentId: {
+            type: Schema.Types.ObjectId,
+            ref: "Payment",
+        },
     },
     {
         versionKey: false,
