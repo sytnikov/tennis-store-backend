@@ -21,9 +21,7 @@ async function createShipment(shipment: Shipment) {
 
 async function updateShipment(index: string, shipment: shipmentUpdate) {
     const updatedShipment = await ShipmentRepo.findByIdAndUpdate(
-        {
-            _id: index,
-        },
+        { _id: index },
         shipment,
         { new: true }
     );
