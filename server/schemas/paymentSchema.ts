@@ -8,6 +8,8 @@ export const paymentBodySchema = z
     ordersId: z.array(
       z.string().refine((val) => mongoose.Types.ObjectId.isValid(val))
     ),
+    bankName: z.string(),
+    accountNumber: z.number(),
   })
   .strict();
 
