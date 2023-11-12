@@ -20,6 +20,8 @@ const PaymentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    bankName: String,
+    accountNumber: Number,
   },
   {
     versionKey: false,
