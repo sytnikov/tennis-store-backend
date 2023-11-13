@@ -8,4 +8,5 @@ const checkoutRouter = express.Router()
 
 checkoutRouter.post("/", validate(newOrderSchema), createOrder)
 
+
 export default checkoutRouter

@@ -8,7 +8,7 @@ export const updateOrder = async(
   res: Response,
   next: NextFunction
 ) => {
-  const orderId = req.params.id;
+  const orderId = req.params.orderId;
   const updatedOrder = req.body;
 
   const order = await ordersService.updateOrder(orderId, updatedOrder);
