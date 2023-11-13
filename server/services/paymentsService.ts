@@ -4,7 +4,7 @@ import UserRepo from "../models/UserModel";
 import { Payment } from "../types/Payment";
 
 const createOne = async (newPayment: Payment) => {
-  const { userId, ordersId, method } = newPayment;
+  const { userId, ordersId, method, bankName, accountNumber } = newPayment;
   const user = await UserRepo.findById(userId);
   if (!user) {
     return null;
@@ -24,7 +24,8 @@ const createOne = async (newPayment: Payment) => {
           userId,
           method,
           orderId: order._id,
-          status: "completed",
+          bankName,
+          accountNumber
         });
         await createdPayment.save();
         await OrderRepo.findByIdAndUpdate(order._id, {

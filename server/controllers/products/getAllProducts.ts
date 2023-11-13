@@ -9,9 +9,5 @@ export const getAllProducts = async (
   next: NextFunction
 ) => {
   const products = await services.findAll();
-  if (products) {
-    res.status(200).json(products);
-    return;
-  }
-  next(ApiError.resourceNotFound("Products data not found"));
+  res.status(200).json(products);
 };

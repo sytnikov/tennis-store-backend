@@ -8,7 +8,7 @@ export const getSingleOrder = async (
   res: Response,
   next: NextFunction
 ) => {
-  const orderId = req.params.id;
+  const orderId = req.params.orderId;
   const order = await ordersService.getSingleOrder(orderId);
 
   if (!order) {
