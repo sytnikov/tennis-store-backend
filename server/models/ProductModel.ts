@@ -15,13 +15,13 @@ const ProductSchema = new Schema(
       required: true,
     },
     images: {
-      type: [{ type: String }],
+      type: [String],
       required: true,
     },
-    category: {
+    categoryId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "categories",
+      ref: "Category",
     },
     stock: Number,
   },

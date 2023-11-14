@@ -4,8 +4,14 @@ const Schema = mongoose.Schema;
 
 const CategorySchema = new Schema(
   {
-    name: String,
-    images: [String],
+    name: {
+      type: String,
+      required: true,
+    },
+    images: {
+      type: [String],
+      required: true
+    },
   },
   {
     versionKey: false,
