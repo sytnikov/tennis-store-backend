@@ -15,6 +15,7 @@ const createOne = async (newPayment: Payment) => {
   );
   const createdPayments = await Promise.all(
     existingOrders.map(async (order) => {
+      const paymentDate = new Date();
       const existingPayment = await PaymentRepo.findOne({
         userId,
         orderId: order._id,
@@ -25,7 +26,8 @@ const createOne = async (newPayment: Payment) => {
           method,
           orderId: order._id,
           bankName,
-          accountNumber
+          accountNumber,
+          paymentDate,
         });
         await createdPayment.save();
         await OrderRepo.findByIdAndUpdate(order._id, {

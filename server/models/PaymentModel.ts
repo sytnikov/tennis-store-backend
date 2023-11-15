@@ -27,6 +27,9 @@ const PaymentSchema = new Schema(
       type: String,
       required: true,
     },
+    paymentDate: {
+      type: Date,
+    },
   },
   {
     versionKey: false,
