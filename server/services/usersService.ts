@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
 import UserRepo from "../models/UserModel";
 import { User, UserUpdate } from "../types/User";
 
@@ -40,6 +41,27 @@ async function signUp(name: string, email: string, password: string) {
   return newUser;
 }
 
+async function logIn(email: string, password: string) {
+const foundUser = await UserRepo.findOne({email: email}) 
+if (!foundUser) {
+  return null
+}
+
+const isValid = bcrypt.compareSync(password, foundUser.password)
+console.log('isValid:', isValid)
+if (!isValid) {
+  return null
+}
+const payload = {
+  email: foundUser.email,
+  role: foundUser.role
+}
+
+const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {expiresIn: "1h"})
+
+return accessToken
+}
+
 export default {
   findAll,
   getSingleUser,
@@ -47,4 +69,5 @@ export default {
   updateUser,
   deleteUser,
   signUp,
+  logIn
 };

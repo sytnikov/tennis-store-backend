@@ -4,6 +4,7 @@ import { deleteUser } from "./deleteUser";
 import { updateUser } from "./updateUser";
 import { getAllUsers } from "./getAllusers";
 import { signUp } from "./signUp";
+import { logIn } from "./logIn";
 
 export default {
   createUser,
@@ -12,4 +13,5 @@ export default {
   deleteUser,
   updateUser,
   signUp,
+  logIn
 };

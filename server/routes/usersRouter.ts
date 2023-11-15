@@ -13,5 +13,6 @@ usersRouter.post('/', validate(userSchema), emailChecker, usersController.create
 usersRouter.put('/:userId',validate(updateUserSchema), emailChecker,usersController.updateUser);
 usersRouter.delete('/:userId', usersController.deleteUser);
 usersRouter.post("/signup", emailChecker, usersController.signUp);
+usersRouter.post("/login", usersController.logIn);
 
 export default usersRouter;
