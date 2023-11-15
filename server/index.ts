@@ -31,6 +31,7 @@ app.use("/payments", loggingMiddleware, paymentsRouter);
 
 app.use(apiErrorHandler);
 app.use(routeNotFound);
+
 app.listen(PORT, () => {
   console.log(`👀 Server is running on localhost:${PORT}`);
 });
