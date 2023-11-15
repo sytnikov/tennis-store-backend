@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
-import UserRepo from "../models/UserModel";
-import { User, UserUpdate } from "../types/User";
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import UserRepo from '../models/UserModel';
+import { User, UserUpdate } from '../types/User';
 
 async function findAll() {
   const users = await UserRepo.find().exec();
@@ -42,24 +42,26 @@ async function signUp(name: string, email: string, password: string) {
 }
 
 async function logIn(email: string, password: string) {
-const foundUser = await UserRepo.findOne({email: email}) 
-if (!foundUser) {
-  return null
-}
+  const foundUser = await UserRepo.findOne({ email: email });
+  if (!foundUser) {
+    return null;
+  }
 
-const isValid = bcrypt.compareSync(password, foundUser.password)
-console.log('isValid:', isValid)
-if (!isValid) {
-  return null
-}
-const payload = {
-  email: foundUser.email,
-  role: foundUser.role
-}
+  const isValid = bcrypt.compareSync(password, foundUser.password);
 
-const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {expiresIn: "1h"})
+  if (!isValid) {
+    return null;
+  }
+  const payload = {
+    email: foundUser.email,
+    role: foundUser.role,
+  };
 
-return accessToken
+  const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
+    expiresIn: '1h',
+  });
+
+  return accessToken;
 }
 
 export default {
@@ -69,5 +71,5 @@ export default {
   updateUser,
   deleteUser,
   signUp,
-  logIn
+  logIn,
 };
