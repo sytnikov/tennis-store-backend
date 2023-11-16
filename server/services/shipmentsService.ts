@@ -36,7 +36,7 @@ async function createShipment(shipment: Shipment) {
                 orderId: order._id,
             });
             if(!existingShipment){
-                const createShipment = await ShipmentRepo.create({
+                const createShipment = new ShipmentRepo({
                     userId,
                     orderId: order._id,
                     address: user.address,
