@@ -19,29 +19,26 @@ const ShipmentSchema = new Schema({
             default: "pending",
         },
         address: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        postalCode: {
-            type: String,
-            required: true,
-        },
-        country: {
-            type: String,
+            type: {
+                city: {
+                    type: String,
+                    required: true,
+                },
+                postalCode: {
+                    type: String,
+                    required: true,
+                },
+                country: {
+                    type: String,
+                    required: true,
+                },
+            },
             required: true,
         },
         shippingPrice: {
             type: Number,
             required: true,
             default: 0.0,
-        },
-        paymentId: {
-            type: Schema.Types.ObjectId,
-            ref: "Payment",
         },
     },
     {

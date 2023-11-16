@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { shipmentSchema } from "../schemas/shipmentSchema";
+import { shipmentBodySchema } from "../schemas/shipmentSchema";
 import mongoose from "mongoose";
 
-export type Shipment = z.infer<typeof shipmentSchema> & {
+export type Shipment = z.infer<typeof shipmentBodySchema> & {
     _id: mongoose.Types.ObjectId;
     status: 'Pending' | 'Shipped' | 'Delivered';
     createdAt: Date;
