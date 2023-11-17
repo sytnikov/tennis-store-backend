@@ -13,7 +13,7 @@ import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
 import { routeNotFound } from "./middlewares/routeNotFound";
 
-const PORT = 8080;
+const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +32,6 @@ app.use("/payments", loggingMiddleware, paymentsRouter);
 app.use(apiErrorHandler);
 app.use(routeNotFound);
 
-app.listen(PORT, () => {
-  console.log(`👀 Server is running on localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`👀 Server is running on localhost:${port}`);
 });

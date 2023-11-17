@@ -1,5 +1,6 @@
 import { JwtPayload } from "jsonwebtoken";
 import { Request } from "express";
+import { Role } from "../utils/role";
 
 export interface DecodedUser extends JwtPayload {
   userId: string;
@@ -9,13 +10,6 @@ export interface DecodedUser extends JwtPayload {
 export interface WithAuthRequest extends Request {
   decoded?: DecodedUser;
 }
-
-export const role = {
-  USER: "USER",
-  ADMIN: "ADMIN",
-} as const;
-
-export type Role = keyof typeof role;
 
 export type User = {
   name: string;
