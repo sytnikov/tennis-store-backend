@@ -8,7 +8,7 @@ export const deleteOrder = async (
   res: Response,
   next: NextFunction
 ) => {
-  const orderId = req.params.id;
+  const orderId = req.params.orderId;
   const foundIndex = await ordersService.removeOrder(orderId);
 
   if (foundIndex === null) {

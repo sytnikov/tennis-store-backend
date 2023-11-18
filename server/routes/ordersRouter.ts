@@ -10,9 +10,9 @@ import { orderSchema } from '../schemas/orderSchema';
 const ordersRouter = Router();
 
 ordersRouter.get('/', getAllOrders);
-ordersRouter.get('/:id', getSingleOrder);
+ordersRouter.get('/:orderId', getSingleOrder);
 ordersRouter.post('/', validate(orderSchema), addOrder);
-ordersRouter.patch('/:id', validate(orderSchema), updateOrder);
-ordersRouter.delete('/:id', deleteOrder);
+ordersRouter.patch("/:orderId", validate(orderSchema), updateOrder);
+ordersRouter.delete("/:orderId", deleteOrder);
 
 export default ordersRouter;

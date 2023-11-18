@@ -9,9 +9,10 @@ export async function addShipment(
     next: NextFunction
     ) {
         try {
-            const shipment = await shipmentsService.createShipment(req.body);
-            if (!shipment || shipment === undefined) {
-                return next(ApiError.resourceNotFound("Cannot add Shipment"));
+            const newShipment = req.body;
+            const shipment = await shipmentsService.createShipment(newShipment);
+            if (!shipment) {
+                return next(ApiError.resourceNotFound("Cannot add Shipment there's somthing wrong with the data"));
             }
             res.status(201).json({shipment, message: "Shipment created"});
         } catch (error) {

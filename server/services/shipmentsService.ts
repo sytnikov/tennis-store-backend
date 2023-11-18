@@ -17,20 +17,20 @@ async function getOneShipment(index: string){
 }
 
 async function createShipment(shipment: Shipment) {
-    const { userId, orderId } = shipment;
-    const user = await ShipmentRepo.findById(userId);
-
+    const { userId, orderId, address, shippingPrice } = shipment;
+    const user = await UserRepo.findById(userId);
+    
     if (!user) {
         return null;
     }
 
     const userOrders = await OrderRepo.find({ userId });
-    const exisitngOrder = userOrders.filter((order) => {
-        return orderId.includes(order._id.toString());
-    });
+    const exisitngOrders = userOrders.filter((order) => 
+        orderId.includes(order._id.toString())
+    );
 
     const newShipment = await Promise.all(
-        exisitngOrder.map(async (order) => {
+        exisitngOrders.map(async (order) => {
             const existingShipment = await ShipmentRepo.findOne({
                 userId,
                 orderId: order._id,
@@ -39,12 +39,8 @@ async function createShipment(shipment: Shipment) {
                 const createShipment = new ShipmentRepo({
                     userId,
                     orderId: order._id,
-                    address: user.address,
-                    city: user.address.city,
-                    postalCode: user.address.postalCode,
-                    country: user.address.country,
-                    shippingPrice: user.shippingPrice,
-                    status: "completed",
+                    address,
+                    shippingPrice,
                 });
                 await createShipment.save();
                 await OrderRepo.findByIdAndUpdate(
@@ -56,6 +52,7 @@ async function createShipment(shipment: Shipment) {
             }
         })
     );
+    return newShipment.filter(Boolean);
 }
 
 async function updateShipment(index: string, shipment: shipmentUpdate) {
