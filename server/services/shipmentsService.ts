@@ -10,9 +10,9 @@ async function findAll() {
     return shipments;
 }
 
-async function getOneShipment(index: string){
-    const id = new mongoose.Types.ObjectId(index)
-    const existedShipment = await ShipmentRepo.findById(id);
+async function getOne(index: string){
+    const id = new mongoose.Types.ObjectId(index);
+    const existedShipment = await ShipmentRepo.findOne({ _id: id }).exec();
     return existedShipment;
 }
 
@@ -72,7 +72,7 @@ async function deleteShipment(index: string) {
 
 export default {
     findAll,
-    getOneShipment,
+    getOne,
     createShipment,
     updateShipment,
     deleteShipment

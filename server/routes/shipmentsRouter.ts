@@ -7,7 +7,7 @@ import { shipmentSchema } from "../schemas/shipmentSchema";
 const shipmentsRouter = Express.Router();
 
 shipmentsRouter.get("/", shipmentsController.getAllShipments);
-shipmentsRouter.get("/:shipmentId", shipmentsController.getAllShipments);
+shipmentsRouter.get("/:shipmentId", shipmentsController.getOneShipment);
 shipmentsRouter.post("/", validate(shipmentSchema), shipmentsController.addShipment);
 shipmentsRouter.put("/:shipmentId", validate(shipmentSchema), shipmentsController.updateShipment);
 shipmentsRouter.delete("/:shipmentId", shipmentsController.deleteShipment);

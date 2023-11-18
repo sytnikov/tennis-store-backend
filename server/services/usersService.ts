@@ -12,7 +12,7 @@ async function findAll() {
 
 async function getSingleUser(index: string) {
   const id = new mongoose.Types.ObjectId(index);
-  const user = await UserRepo.findById(id);
+  const user = await UserRepo.findOne({ _id: id }).exec();
   return user;
 }
 
