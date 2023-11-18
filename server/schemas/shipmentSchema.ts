@@ -14,3 +14,14 @@ export const shipmentBodySchema = z.object({
 export const shipmentSchema = z.object({
     body: shipmentBodySchema,
 });
+
+export const updatedShipmentBodySchema = z.object({
+        userId: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val)).optional(),
+        orderId: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val)).optional(),
+        address: z.string().optional(),
+        shippingPrice: z.number().optional(),
+}).partial().strict();
+
+export const updatedShipmentSchema = z.object({
+    body: updatedShipmentBodySchema,
+});

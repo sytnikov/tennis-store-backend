@@ -2,14 +2,14 @@ import Express from "express";
 
 import shipmentsController from "../controllers/shipments";
 import { validate } from "../middlewares/validate";
-import { shipmentSchema } from "../schemas/shipmentSchema";
+import { shipmentSchema, updatedShipmentSchema } from "../schemas/shipmentSchema";
 
 const shipmentsRouter = Express.Router();
 
 shipmentsRouter.get("/", shipmentsController.getAllShipments);
 shipmentsRouter.get("/:shipmentId", shipmentsController.getOneShipment);
 shipmentsRouter.post("/", validate(shipmentSchema), shipmentsController.addShipment);
-shipmentsRouter.put("/:shipmentId", validate(shipmentSchema), shipmentsController.updateShipment);
+shipmentsRouter.put("/:shipmentId", validate(updatedShipmentSchema), shipmentsController.updateShipment);
 shipmentsRouter.delete("/:shipmentId", shipmentsController.deleteShipment);
 
 export default shipmentsRouter;
