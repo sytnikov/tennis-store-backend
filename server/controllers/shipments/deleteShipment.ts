@@ -9,7 +9,7 @@ export async function deleteShipment(
     next: NextFunction
     ) {
         const id = req.params.shipmentId;
-        const shipmentsData = await shipmentsService.getOneShipment(id);
+        const shipmentsData = await shipmentsService.getOne(id);
         if (!shipmentsData || shipmentsData === undefined) {
             next(ApiError.resourceNotFound("Shipment can't be deleted"));
             return;
