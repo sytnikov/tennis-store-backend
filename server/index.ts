@@ -1,6 +1,7 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
+import passport from "passport";
 
 import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
@@ -12,11 +13,14 @@ import paymentsRouter from "./routes/paymentsRouter";
 import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
 import { routeNotFound } from "./middlewares/routeNotFound";
+import { authWithGoogle } from "./middlewares/authWithGoogle";
 
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+passport.use(authWithGoogle());
 
 const mongoURL = process.env.DB_URL_COMMON as string;
 mongoose.connect(mongoURL).then(() => console.log("Connected!"));

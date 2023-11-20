@@ -8,7 +8,6 @@ import {
   UpdateProductInput,
 } from "../types/Product";
 import { ProductQueries } from "../types/ProductQueries";
-import ProductModel from "../models/ProductModel";
 
 const createOne = async (newProduct: CreateProductInput) => {
   const category: Category | null = await CategoryRepo.findOne({
