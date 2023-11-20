@@ -1,26 +1,22 @@
-import { Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import { ApiError } from './errors/ApiError';
-import { DecodedUser, WithAuthRequest } from '../types/Auth';
+import jwt from "jsonwebtoken";
+import { NextFunction, Request, Response } from "express";
+import { DecodedUser, WithAuthRequest } from "../types/Auth";
+import { ApiError } from "./errors/ApiError";
 
 export function checkAuth(
   req: WithAuthRequest,
   _: Response,
   next: NextFunction
 ) {
-  const token = req.headers.authorization?.split(' ')[1];
+  const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
-    next(ApiError.forbidden('Token is missing'));
+    next(ApiError.forbidden("Token is not found"));
     return;
   }
-
-  const decode = jwt.verify(
+  const decoded = jwt.verify(
     token,
     process.env.TOKEN_SECRET as string
   ) as DecodedUser;
-
-  req.decoded = decode;
+  req.decoded = decoded;
   next();
 }
-
-
