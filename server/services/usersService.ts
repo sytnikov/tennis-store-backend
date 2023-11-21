@@ -62,12 +62,13 @@ async function logIn(email: string, password: string) {
   const payload = {
     email: foundUser.email,
     role: foundRole.name,
+    permissions: foundRole.permissions
   };
 
   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
     expiresIn: '1h',
   });
-
+  
   return accessToken;
 }
 

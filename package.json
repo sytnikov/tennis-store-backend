@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles --coverage --verbose false",
-    "server": "npx tsx watch ./server/index.ts"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npx tsx watch ./server/server.ts"
   },
   "keywords": [],
   "author": "",
