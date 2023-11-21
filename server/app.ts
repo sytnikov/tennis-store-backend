@@ -1,6 +1,4 @@
-import express, { Request, Response } from "express";
-import mongoose from "mongoose";
-import "dotenv/config";
+import express from "express";
 
 import productsRouter from "./routes/productsRouter";
 import categoriesRouter from "./routes/categoriesRouter";
@@ -13,13 +11,9 @@ import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
 import { routeNotFound } from "./middlewares/routeNotFound";
 
-const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-const mongoURL = process.env.DB_URL_COMMON as string;
-mongoose.connect(mongoURL).then(() => console.log("Connected!"));
 
 app.use("/products", loggingMiddleware, productsRouter);
 app.use("/categories", loggingMiddleware, categoriesRouter);
@@ -32,6 +26,4 @@ app.use("/payments", loggingMiddleware, paymentsRouter);
 app.use(apiErrorHandler);
 app.use(routeNotFound);
 
-app.listen(port, () => {
-  console.log(`👀 Server is running on localhost:${port}`);
-});
+export default app
