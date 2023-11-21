@@ -1,10 +1,13 @@
-import { FilterQuery } from "mongoose";
+import {FilterQuery, Types } from "mongoose";
 import CategoryRepo from "../models/CategoryModel";
 import ProductRepo from "../models/ProductModel";
 import { Category } from "../types/Category";
-import { CreateProductInput, UpdateProductInput } from "../types/Product";
+import {
+  CreateProductInput,
+  Product,
+  UpdateProductInput,
+} from "../types/Product";
 import { ProductQueries } from "../types/ProductQueries";
-import ProductModel from "../models/ProductModel";
 
 const createOne = async (newProduct: CreateProductInput) => {
   const category: Category | null = await CategoryRepo.findOne({
@@ -45,17 +48,32 @@ const findOne = async (productId: string) => {
 };
 
 const queryHandling = async (queries: ProductQueries) => {
-  const { page = 1, limit = 10, sort } = queries;
+  const { page, limit, sort, ...filterValues } = queries;
+  const pageNumber = Number(page);
+  const pageSize = Number(limit);
+  const sortByPrice: Record<string, "asc" | "desc"> | undefined = sort
+    ? { price: sort }
+    : undefined;
+  const [key, value]: [string, any] =
+    Object.entries(filterValues)[0] || [];
+  let filteredProducts: FilterQuery<Product>;
 
-  const pageNumber = +page;
-  const pageSize = +limit;
-
-  let sortByPrice: Record<string, "asc" | "desc"> | undefined;
-  if (sort) {
-    sortByPrice = { price: sort };
+  switch (true) {
+    case !isNaN(Number(value)):
+      filteredProducts = { [key]: { $eq: value } };
+      break;
+    case Types.ObjectId.isValid(value):
+      filteredProducts = { [key]: { $eq: new Types.ObjectId(value) } };
+      break;
+    case typeof value === "string":
+      filteredProducts = { [key]: { $regex: new RegExp(value, "i") } };
+      break;
+    default:
+      filteredProducts = {};
+      break;
   }
-
-  const products = await ProductRepo.find()
+  
+  const products = await ProductRepo.find(filteredProducts)
     .sort(sortByPrice)
     .limit(pageSize)
     .skip((pageNumber - 1) * pageSize);
