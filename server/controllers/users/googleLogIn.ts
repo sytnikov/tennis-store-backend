@@ -1,21 +1,20 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 
-import jwt from "jsonwebtoken";
+import usersService from "../../services/usersService";
+import { ApiError } from "../../middlewares/errors/ApiError";
 
-
-export async function googleLogIn (req: any, res: Response, next: NextFunction)  {
+export async function googleLogIn(
+  req: any,
+  res: Response,
+  next: NextFunction
+) {
   const user = req.user;
-  if (user) {
-    const payload = {
-    //   userId: user._id,
-    //   email: user.email,
-    //   role: user.role,
-    };
-    const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
-      expiresIn: "1h",
-    });
-    res.json({
-      accessToken,
-    });
+  const accessToken = await usersService.googleLogin(user);
+  if (!accessToken) {
+    next(ApiError.forbidden("Credentials is invalid"));
+    return;
   }
+  res.json({
+    accessToken,
+  });
 }

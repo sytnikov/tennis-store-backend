@@ -1,4 +1,4 @@
-import { AnyKeys, FilterQuery, StringExpressionOperatorReturningBoolean, Types } from "mongoose";
+import {FilterQuery, Types } from "mongoose";
 import CategoryRepo from "../models/CategoryModel";
 import ProductRepo from "../models/ProductModel";
 import { Category } from "../types/Category";
