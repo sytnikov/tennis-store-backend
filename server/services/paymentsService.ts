@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import OrderRepo from "../models/OrderModel";
 import PaymentRepo from "../models/PaymentModel";
 import UserRepo from "../models/UserModel";
-import { Payment } from "../types/Payment";
+import { createPaymentInput } from "../types/Payment";
 import shipmentsService from "./shipmentsService";
 
-const createOne = async (newPayment: Payment) => {
+const createOne = async (newPayment: createPaymentInput) => {
   const { userId, ordersId, method, bankName, accountNumber, shipmentInfo } =
     newPayment;
   const user = await UserRepo.findById(userId);

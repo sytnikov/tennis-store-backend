@@ -11,7 +11,6 @@ describe("Category controller", () => {
   afterEach(async () => {
     await mongoHelper.clearDatabase();
   });
-
   afterAll(async () => {
     await mongoHelper.closeDatabase();
   });

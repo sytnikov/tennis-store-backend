@@ -7,7 +7,7 @@ import { ProductQueries } from "ProductQueries";
 import { Category } from "Category";
 import mongoose from "mongoose";
 
-describe("Product controller", () => {
+describe("Product service", () => {
   let mongoHelper: MongoHelper;
   let productOne: ProductDocument;
   let productTwo: ProductDocument;

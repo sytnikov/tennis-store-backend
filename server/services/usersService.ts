@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserRepo from "../models/UserModel";
 import RoleRepo from "../models/RoleModel";
-import { User, UserUpdate } from "../types/User";
+import { CreateUserInput, User, UserUpdate } from "../types/User";
 
 async function findAll() {
   const users = await UserRepo.find().exec();
@@ -16,7 +16,7 @@ async function getSingleUser(index: string) {
   return user;
 }
 
-async function createUser(user: User) {
+async function createUser(user: CreateUserInput) {
   const newUser = new UserRepo(user);
   await newUser.save();
   return newUser;
@@ -34,15 +34,15 @@ async function deleteUser(index: string) {
   return deletedUser;
 }
 
-async function signUp(name: string, email: string, password: string) {
+async function signUp(name: string, email: string, password: string, roleId: string) {
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const user = new UserRepo({ name, email, password: hashedPassword });
+  const user = new UserRepo({ name, email, roleId, password: hashedPassword });
   await user.save();
   const foundRole = await RoleRepo.findById({ _id: user.roleId });
   if (!foundRole) {
     return null;
   }
-  const newUser = { name, email, role: foundRole.name };
+  const newUser = { name, email, roleId: foundRole.name };
   return newUser;
 }
 
