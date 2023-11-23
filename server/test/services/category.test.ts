@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import CategoryService from "../../services/categoriesService";
 import CategoryRepo from "../../models/CategoryModel"
-import connect, { MongoHelper } from "../db-hepper";
+import connect, { MongoHelper } from "../db-helper";
 
 describe("Categories Service", () => {
   let mongoHelper: MongoHelper;
