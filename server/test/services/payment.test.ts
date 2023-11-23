@@ -4,7 +4,7 @@ import UserService from "../../services/usersService";
 import ProductRepo from "../../models/ProductModel";
 import PaymentService from "../../services/paymentsService";
 import CategoryRepo from "../../models/CategoryModel";
-import connect, { MongoHelper } from "../db-hepper";
+import connect, { MongoHelper } from "../db-helper";
 import { Category } from "Category";
 import { newOrderData } from "Order";
 import { CreateUserInput } from "../../types/User";

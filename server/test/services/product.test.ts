@@ -2,7 +2,7 @@ import { CreateProductInput, Product, ProductDocument } from "Product";
 import ProductService from "../../services/productsService";
 import ProductRepo from "../../models/ProductModel";
 import CategoryRepo from "../../models/CategoryModel";
-import connect, { MongoHelper } from "../db-hepper";
+import connect, { MongoHelper } from "../db-helper";
 import { ProductQueries } from "ProductQueries";
 import { Category } from "Category";
 import mongoose from "mongoose";
