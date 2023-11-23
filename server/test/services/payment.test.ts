@@ -76,5 +76,4 @@ describe("Payment service", () => {
     expect(payment?.[0]?.method).toEqual("paypal");
     expect(payment?.[0]?.bankName).toEqual("OTP");
   });
-
 });
