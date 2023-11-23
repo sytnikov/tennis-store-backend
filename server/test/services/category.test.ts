@@ -14,7 +14,6 @@ describe("Categories Service", () => {
   afterEach(async () => {
     await mongoHelper.clearDatabase();
   });
-
   afterAll(async () => {
     await mongoHelper.closeDatabase();
   });
