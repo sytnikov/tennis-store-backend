@@ -1,4 +1,4 @@
-import {FilterQuery, Types } from "mongoose";
+import { FilterQuery, Types } from "mongoose";
 import CategoryRepo from "../models/CategoryModel";
 import ProductRepo from "../models/ProductModel";
 import { Category } from "../types/Category";
@@ -13,11 +13,11 @@ const createOne = async (newProduct: CreateProductInput) => {
   const category: Category | null = await CategoryRepo.findOne({
     _id: newProduct.categoryId,
   });
-  if (category) {
-    const product = new ProductRepo(newProduct);
-    return await product.save();
+  if (!category) {
+    return null;
   }
-  return false;
+  const product = new ProductRepo(newProduct);
+  return await product.save();
 };
 
 const findAll = async () => {
@@ -54,8 +54,7 @@ const queryHandling = async (queries: ProductQueries) => {
   const sortByPrice: Record<string, "asc" | "desc"> | undefined = sort
     ? { price: sort }
     : undefined;
-  const [key, value]: [string, any] =
-    Object.entries(filterValues)[0] || [];
+  const [key, value]: [string, any] = Object.entries(filterValues)[0] || [];
   let filteredProducts: FilterQuery<Product>;
 
   switch (true) {
@@ -72,7 +71,7 @@ const queryHandling = async (queries: ProductQueries) => {
       filteredProducts = {};
       break;
   }
-  
+
   const products = await ProductRepo.find(filteredProducts)
     .sort(sortByPrice)
     .limit(pageSize)
