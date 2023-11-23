@@ -33,6 +33,7 @@ export const uptadeProductSchema = z.object({
       price: z.number().optional(),
       description: z.string().optional(),
       images: z.array(z.string()).optional(),
+      stock: z.number().optional(),
     })
     .strict(),
 });
