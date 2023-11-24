@@ -38,7 +38,7 @@ Within this assignment the REST API for an e-commerce website is implemented acc
 Within the project, the following entities are covered: users, products, categories, orders, roles, payments, and shipments.
 ![er-diagram](Database-ER-diagram.png)
 
-### Project Features
+## Project Features
 
 ### Entity CRUD Operations
 
