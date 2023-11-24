@@ -14,5 +14,8 @@ export const addPayment = async (
     next(ApiError.badRequest("Payment not created"));
     return;
   }
-  res.status(201).json({ message: "Payment is created", payment });
+  res.status(201).json({
+    message: "Payment is created",
+    payment,
+  });
 };

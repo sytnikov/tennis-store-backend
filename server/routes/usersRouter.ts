@@ -7,6 +7,7 @@ import { emailChecker } from '../middlewares/emailChecker';
 import { checkAuth } from '../middlewares/checkAuth';
 import { checkRoles } from '../middlewares/checkRoles';
 import { ROLE } from '../utils/role';
+import passport from 'passport';
 
 const usersRouter = express.Router();
 
@@ -17,5 +18,10 @@ usersRouter.put('/:userId',validate(updateUserSchema), emailChecker,usersControl
 usersRouter.delete('/:userId', usersController.deleteUser);
 usersRouter.post("/signup", emailChecker, usersController.signUp);
 usersRouter.post("/login", usersController.logIn);
+usersRouter.post(
+  "/login-google",
+  passport.authenticate("google-id-token", { session: false }),
+  usersController.googleLogIn
+);
 
 export default usersRouter;

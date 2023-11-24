@@ -3,9 +3,13 @@ import mongoose from "mongoose";
 import { productBodySchema } from "../schemas/productSchema";
 
 export type Product = z.infer<typeof productBodySchema> & {
-  id: mongoose.Types.ObjectId;
+  _id: mongoose.Types.ObjectId;
 };
 export type UpdateProductInput = Partial<Product>;
-export type CreateProductInput = Omit<Product, "id"> & {
-  categoryId?: mongoose.Types.ObjectId;
-};
+export type CreateProductInput = Omit<Product, "_id">;
+interface ProductDto
+  extends Omit<z.infer<typeof productBodySchema>, "categoryId" | "stock"> {}
+export interface ProductDocument extends mongoose.Document, ProductDto {
+  categoryId: mongoose.Types.ObjectId;
+  stock?: number | null | undefined;
+}

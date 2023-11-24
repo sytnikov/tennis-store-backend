@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { z } from "zod";
+import { shipmentBodySchema } from "./shipmentSchema";
 
 export const paymentBodySchema = z
   .object({
@@ -14,6 +15,7 @@ export const paymentBodySchema = z
     accountNumber: z.string({
       required_error: "AccountNumber  is required",
     }),
+    shipmentInfo: shipmentBodySchema,
   })
   .strict();
 
