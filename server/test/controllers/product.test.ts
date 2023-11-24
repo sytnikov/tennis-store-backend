@@ -7,7 +7,6 @@ import connect, { MongoHelper } from "../db-helper";
 import app from "../../app";
 import { CreateProductInput, ProductDocument } from "Product";
 import { Category } from "Category";
-import connect, { MongoHelper } from "../db-helper";
 
 describe("Product controller", () => {
   let mongoHelper: MongoHelper;

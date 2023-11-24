@@ -1,7 +1,7 @@
 import request from "supertest";
 
 import app from "../../app";
-import { CreateProductInput, ProductDocument } from "Product";
+import { ProductDocument } from "Product";
 import { Category } from "Category";
 import connect, { MongoHelper } from "../db-helper";
 import { CreateUserInput } from "User";

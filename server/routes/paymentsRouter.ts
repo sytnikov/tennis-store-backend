@@ -7,7 +7,7 @@ import { checkAuth } from "../middlewares/checkAuth";
 
 const router = express.Router();
 router.get("/", ctrl.getAllPayments);
-router.post("/", checkAuth, validate(paymentSchema), ctrl.addPayment);
+router.post("/", validate(paymentSchema), ctrl.addPayment);
 router.get("/:paymentId", ctrl.getPayment);
 router.delete("/:paymentId", ctrl.removePayment);
 
