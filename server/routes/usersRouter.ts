@@ -13,7 +13,7 @@ const usersRouter = express.Router();
 
 usersRouter.get('/', usersController.getAllUsers);
 usersRouter.get('/:userId', usersController.getSingleUser);
-usersRouter.post('/', validate(userSchema), checkAuth, checkRoles(ROLE.USER), emailChecker, usersController.createUser);
+usersRouter.post('/', validate(userSchema), emailChecker, usersController.createUser);
 usersRouter.put('/:userId',validate(updateUserSchema), emailChecker,usersController.updateUser);
 usersRouter.delete('/:userId', usersController.deleteUser);
 usersRouter.post("/signup", emailChecker, usersController.signUp);
