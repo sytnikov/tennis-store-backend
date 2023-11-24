@@ -42,10 +42,9 @@ describe("User controller", () => {
     const newUser = new UserRepo(user);
     await newUser.save();
     const response = await request(app).get("/users");
-    console.log("🚀 ~ file: user.test.ts:45 ~ it ~ response:", response.body);
-    // expect(response.body.users.length).toBe(1);
-    // expect(response.body.users[0]).toMatchObject(user);
-    // expect(response.status).toBe(200);
+    expect(response.body.users.length).toBe(1);
+    expect(response.body.users[0]).toMatchObject(user);
+    expect(response.status).toBe(200);
   });
 
   it("Should return one user by id", async () => {

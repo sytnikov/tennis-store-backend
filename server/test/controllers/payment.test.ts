@@ -9,7 +9,6 @@ import { newOrderData } from "Order";
 import OrderService from "../../services/ordersService";
 import UserService from "../../services/usersService";
 import ProductRepo from "../../models/ProductModel";
-import PaymentService from "../../services/paymentsService";
 import CategoryRepo from "../../models/CategoryModel";
 
 async function createOrderWithPayment() {
@@ -90,12 +89,9 @@ describe("Product controller", () => {
 
   it("Should delete a payment", async () => {
     const bodyPayment = await createOrderWithPayment();
-    const response1 = await request(app).post("/payments").send(bodyPayment);
-    const payments = await PaymentService.findAll();
-    console.log("🚀 ~ file: payment.test.ts:112 ~ it ~ payments:", payments);
     const response = await request(app).post("/payments").send(bodyPayment);
-    // expect(response.body.payment[0].bankName).toEqual("OTP");
-    // expect(response.body.message).toEqual("Payment is created");
-    // expect(response.body.payment[0].userId).toEqual(bodyPayment?.userId);
+    expect(response.body.payment[0].bankName).toEqual("OTP");
+    expect(response.body.message).toEqual("Payment is created");
+    expect(response.body.payment[0].userId).toEqual(bodyPayment?.userId);
   });
 });
