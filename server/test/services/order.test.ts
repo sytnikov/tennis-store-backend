@@ -10,7 +10,7 @@ import productsService from "../../services/productsService";
 import ProductRepo from "../../models/ProductModel";
 import CategoryRepo from "../../models/CategoryModel";
 
-async function createOrder() {
+export async function createOrder() {
   const bodyUser: CreateUserInput = {
     name: "Alan",
     email: "alan@gmail.com",
@@ -48,6 +48,7 @@ async function createOrder() {
       },
     ],
   };
+
   return await orderService.createOrder(bodyOrder);
 }
 
@@ -91,17 +92,5 @@ describe("Order Service", () => {
     expect(singleOrder).toHaveProperty("userId");
     expect(singleOrder?.paymentStatus).toBe("pending");
     expect(singleOrder?.totalAmount).toBe(369);
-  });
-
-  it("Should delete  order", async () => {
-    const order = await createOrder();
-    if (!order?._id) {
-      return;
-    }
-    const deletedOrder = await orderService.removeOrder(order._id.toString());
-    console.log(
-      "🚀 ~ file: order.test.ts:103 ~ it ~ deletedOrder:",
-      deletedOrder
-    );
   });
 });
