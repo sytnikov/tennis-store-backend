@@ -1,11 +1,11 @@
 import { ProductDocument } from "Product";
-import connect, { MongoHelper } from "../db-helper";
+
 import OrderService from "../../services/ordersService";
 import UserService from "../../services/usersService";
 import ProductRepo from "../../models/ProductModel";
 import PaymentService from "../../services/paymentsService";
 import CategoryRepo from "../../models/CategoryModel";
-
+import connect, { MongoHelper } from "../db-helper";
 import { Category } from "Category";
 import { newOrderData } from "Order";
 import { CreateUserInput } from "../../types/User";
