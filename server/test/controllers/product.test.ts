@@ -2,10 +2,10 @@ import request from "supertest";
 
 import ProductRepo from "../../models/ProductModel";
 import CategoryRepo from "../../models/CategoryModel";
-import connect, { MongoHelper } from "../db-hepper";
 import app from "../../app";
 import { CreateProductInput, ProductDocument } from "Product";
 import { Category } from "Category";
+import connect, { MongoHelper } from "../db-helper";
 
 describe("Product controller", () => {
   let mongoHelper: MongoHelper;
