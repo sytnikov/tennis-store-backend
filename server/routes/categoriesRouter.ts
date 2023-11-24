@@ -14,6 +14,6 @@ categoriesRouter.get("/", controller.getAllCategories);
 categoriesRouter.get("/:categoryId", controller.getSingleCategory);
 categoriesRouter.post("/", validate(categorySchema), controller.createCategory)
 categoriesRouter.put("/:categoryId", validate(categorySchema), controller.updateCategory)
-categoriesRouter.delete("/:categoryId", checkAuth, checkRoles(ROLE.ADMIN), checkPermission("DELETE"), controller.deleteCategory)
+categoriesRouter.delete("/:categoryId", controller.deleteCategory)
 
 export default categoriesRouter
