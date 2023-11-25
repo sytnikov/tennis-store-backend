@@ -1,8 +1,7 @@
 import connect, { MongoHelper } from "../db-helper";
 
 import { CreateUserInput, User } from "User";
-import { CreateProductInput, ProductDocument } from "Product";
-import { Category, CreateCategoryInput } from "Category";
+import { ProductDocument } from "Product";
 import { newOrderData } from "Order";
 import usersService from "../../services/usersService";
 import orderService from "../../services/ordersService";

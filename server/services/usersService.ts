@@ -34,7 +34,12 @@ async function deleteUser(index: string) {
   return deletedUser;
 }
 
-async function signUp(name: string, email: string, password: string, roleId: string) {
+async function signUp(
+  name: string,
+  email: string,
+  password: string,
+  roleId: string
+) {
   const hashedPassword = bcrypt.hashSync(password, 10);
   const user = new UserRepo({ name, email, roleId, password: hashedPassword });
   await user.save();
@@ -48,6 +53,7 @@ async function signUp(name: string, email: string, password: string, roleId: str
 
 async function logIn(email: string, password: string) {
   const foundUser = await UserRepo.findOne({ email: email });
+
   if (!foundUser || !foundUser.password) {
     return null;
   }
@@ -62,29 +68,29 @@ async function logIn(email: string, password: string) {
   const payload = {
     email: foundUser.email,
     role: foundRole.name,
-    permissions: foundRole.permissions
+    permissions: foundRole.permissions,
   };
 
   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
     expiresIn: "1h",
   });
-  
+
   return accessToken;
 }
 
 async function googleLogin(user: User) {
- const foundRole = await RoleRepo.findById({ _id: user.roleId });
- if (user && foundRole) {
-   const payload = {
-     email: user.email,
-     role: foundRole.name,
-   };
-   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
-     expiresIn: "1h",
-   });
-   return accessToken;
- } 
-  return null
+  const foundRole = await RoleRepo.findById({ _id: user.roleId });
+  if (user && foundRole) {
+    const payload = {
+      email: user.email,
+      role: foundRole.name,
+    };
+    const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
+      expiresIn: "1h",
+    });
+    return accessToken;
+  }
+  return null;
 }
 
 export default {
