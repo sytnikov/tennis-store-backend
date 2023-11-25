@@ -7,13 +7,16 @@ import connect, { MongoHelper } from "../db-helper";
 import app from "../../app";
 import { CreateProductInput, ProductDocument } from "Product";
 import { Category } from "Category";
+import { authenticateUser } from "../auth/authenticateUser";
 
 describe("Product controller", () => {
   let mongoHelper: MongoHelper;
   let category: Category;
   let productOne: ProductDocument;
+  let accessToken: string;
 
   beforeEach(async () => {
+    accessToken = await authenticateUser();
     const categoryInstance = new CategoryRepo({
       name: "mobile",
       images: ["fdfgdf"],
@@ -50,7 +53,10 @@ describe("Product controller", () => {
       images: ["fdfgdf"],
       stock: 12,
     };
-    const response = await request(app).post("/products").send(product);
+    const response = await request(app)
+      .post("/products")
+      .send(product)
+      .set("Authorization", `Bearer ${accessToken}`);
     expect(response.body.product).toHaveProperty("name");
     expect(response.body.message).toEqual("Product successfully created");
   });
@@ -68,7 +74,9 @@ describe("Product controller", () => {
   });
 
   it("should delete one product ", async () => {
-    const response = await request(app).delete(`/products/${productOne?._id}`);
+    const response = await request(app)
+      .delete(`/products/${productOne?._id}`)
+      .set("Authorization", `Bearer ${accessToken}`);
     expect(response.statusCode).toEqual(200);
     expect(response.body.message).toEqual("Product deleted successfully");
   });
@@ -79,7 +87,8 @@ describe("Product controller", () => {
       .send({
         name: "sony",
         price: 300,
-      });
+      })
+      .set("Authorization", `Bearer ${accessToken}`);
     expect(response.statusCode).toEqual(200);
     expect(response.body.name).toEqual("sony");
     expect(response.body.price).toEqual(300);

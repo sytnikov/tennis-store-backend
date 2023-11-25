@@ -3,10 +3,15 @@ import request from "supertest";
 import CategoryRepo from "../../models/CategoryModel";
 import connect, { MongoHelper } from "../db-helper";
 import app from "../../app";
+import { authenticateUser } from "../auth/authenticateUser";
 
 describe("Categories Controller", () => {
   let mongoHelper: MongoHelper;
+  let accessToken: string;
 
+  beforeEach(async () => {
+    accessToken = await authenticateUser();
+  });
   beforeAll(async () => {
     mongoHelper = await connect();
   });
@@ -25,7 +30,10 @@ describe("Categories Controller", () => {
   };
 
   it("Should create a new category", async () => {
-    const response = await request(app).post("/categories").send(category);
+    const response = await request(app)
+      .post("/categories")
+      .send(category)
+      .set("Authorization", `Bearer ${accessToken}`);
     expect(response.body.newCategory).toHaveProperty("name");
     expect(response.body).toMatchObject({ newCategory: category });
     expect(response.body.message).toBe("Category successfully created");
@@ -51,7 +59,8 @@ describe("Categories Controller", () => {
     await newCategory.save();
     const response = await request(app)
       .put(`/categories/${newCategory._id}`)
-      .send({ name: "updated", images: ["up1", "up2"] });
+      .send({ name: "updated", images: ["up1", "up2"] })
+      .set("Authorization", `Bearer ${accessToken}`);
     expect(response.body.name).toEqual("updated");
     expect(response.body.images).toEqual(["up1", "up2"]);
   });
@@ -59,9 +68,9 @@ describe("Categories Controller", () => {
   it("Should delete a category", async () => {
     const newCategory = new CategoryRepo(category);
     await newCategory.save();
-    const response = await request(app).delete(
-      `/categories/${newCategory._id}`
-    );
+    const response = await request(app)
+      .delete(`/categories/${newCategory._id}`)
+      .set("Authorization", `Bearer ${accessToken}`);
     expect(response.statusCode).toBe(200);
     expect(response.body.message).toBe("Category successfully deleted");
   });
