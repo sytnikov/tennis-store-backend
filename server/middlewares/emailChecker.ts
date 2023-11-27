@@ -12,6 +12,6 @@ export async function emailChecker(req: Request, res: Response, next: NextFuncti
 
         next();
     } catch (error) {
-        return res.status(500).json({ message: "Something went wrong in emailChecker" });
+        return res.status(500).json({ message: "Something went wrong in email checker" });
     }
 }
