@@ -3,7 +3,7 @@ import { getSingleUser } from "./getSingleUser";
 import { deleteUser } from "./deleteUser";
 import { updateUser } from "./updateUser";
 import { getAllUsers } from "./getAllusers";
-import { signUp } from "./signUp";
+import { register } from "./register";
 import { logIn } from "./logIn";
 import { googleLogIn } from "./googleLogIn";
 
@@ -13,7 +13,7 @@ export default {
   getSingleUser,
   deleteUser,
   updateUser,
-  signUp,
+  register,
   logIn,
   googleLogIn,
 };

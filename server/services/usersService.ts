@@ -6,7 +6,7 @@ import RoleRepo from "../models/RoleModel";
 import { CreateUserInput, User, UserUpdate } from "../types/User";
 
 async function findAll() {
-  const users = await UserRepo.find().exec();
+  const users = await UserRepo.find().populate("roleId").exec();
   return users;
 }
 
@@ -34,14 +34,13 @@ async function deleteUser(index: string) {
   return deletedUser;
 }
 
-async function signUp(
+async function register(
   name: string,
   email: string,
-  password: string,
-  roleId: string
+  password: string
 ) {
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const user = new UserRepo({ name, email, roleId, password: hashedPassword });
+  const user = new UserRepo({ name, email, password: hashedPassword });
   await user.save();
   const foundRole = await RoleRepo.findById({ _id: user.roleId });
   if (!foundRole) {
@@ -66,16 +65,18 @@ async function logIn(email: string, password: string) {
     return null;
   }
   const payload = {
+    name: foundUser.name,
     email: foundUser.email,
     role: foundRole.name,
     permissions: foundRole.permissions,
+    avatar: foundUser.avatar
   };
 
   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
     expiresIn: "1h",
   });
 
-  return accessToken;
+  return { accessToken, payload };
 }
 
 async function googleLogin(user: User) {
@@ -99,7 +100,7 @@ export default {
   createUser,
   updateUser,
   deleteUser,
-  signUp,
+  register,
   logIn,
   googleLogin,
 };

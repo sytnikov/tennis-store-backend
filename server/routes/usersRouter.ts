@@ -14,7 +14,8 @@ const usersRouter = express.Router();
 
 usersRouter.get(
   "/",
-
+  // checkRoles(ROLE.ADMIN),
+  // checkPermission("READ"),
   usersController.getAllUsers
 );
 usersRouter.get(
@@ -49,7 +50,7 @@ usersRouter.delete(
   checkPermission("DELETE"),
   usersController.deleteUser
 );
-usersRouter.post("/signup", emailChecker, usersController.signUp);
+usersRouter.post("/register", validate(userSchema), emailChecker, usersController.register);
 usersRouter.post("/login", usersController.logIn);
 usersRouter.post(
   "/login-google",

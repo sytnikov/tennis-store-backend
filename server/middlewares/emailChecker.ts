@@ -3,7 +3,6 @@ import UserRepo from "../models/UserModel";
 
 export async function emailChecker(req: Request, res: Response, next: NextFunction) {
     try {
-        // check if email already exists
         const emailIsExisted = await UserRepo.findOne({ email: req.body.email });
 
         if (emailIsExisted) {

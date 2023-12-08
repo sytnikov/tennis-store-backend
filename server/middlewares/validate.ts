@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { AnyZodObject } from "zod";
+import { AnyZodObject, z } from "zod";
 
 export function validate(schema: AnyZodObject) {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -11,7 +11,16 @@ export function validate(schema: AnyZodObject) {
       });
       return next();
     } catch (error) {
-      return res.status(400).json(error);
+      if (error instanceof z.ZodError) {
+        const errorMessages = error.errors.map((err) => ({
+          field: err.path.join('.'),
+          message: err.message,
+        }));
+        console.log('errorMessages:', errorMessages)
+        return res.status(400).json({errors: errorMessages});
+      } else {
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
     }
   };
 }
