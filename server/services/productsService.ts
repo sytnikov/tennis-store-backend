@@ -43,7 +43,7 @@ const updateOne = async (
 };
 
 const findOne = async (productId: string) => {
-  const product = await ProductRepo.findById(productId);
+  const product = await ProductRepo.findById(productId).populate("categoryId");
   return product;
 };
 

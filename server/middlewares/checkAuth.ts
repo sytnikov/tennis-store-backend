@@ -8,15 +8,24 @@ export function checkAuth(
   _: Response,
   next: NextFunction
 ) {
+  
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     next(ApiError.forbidden("Token is not found"));
     return;
   }
-  const decoded = jwt.verify(
-    token,
-    process.env.TOKEN_SECRET as string
-  ) as DecodedUser;
-  req.decoded = decoded;
+  try {
+    const decoded = jwt.verify(
+      token,
+      process.env.TOKEN_SECRET as string
+    ) as DecodedUser;
+    req.decoded = decoded;
+  }
+  catch (e) {
+    next(ApiError.forbidden("Token is not valid"));
+    return
+  }
+  
+  console.log('req:', req.decoded)
   next();
 }

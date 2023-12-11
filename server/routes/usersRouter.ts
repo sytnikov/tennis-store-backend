@@ -52,6 +52,7 @@ usersRouter.delete(
 );
 usersRouter.post("/register", validate(userSchema), emailChecker, usersController.register);
 usersRouter.post("/login", usersController.logIn);
+usersRouter.post("/validate-user", usersController.validateUser);
 usersRouter.post(
   "/login-google",
   passport.authenticate("google-id-token", { session: false }),

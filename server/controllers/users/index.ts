@@ -6,6 +6,7 @@ import { getAllUsers } from "./getAllusers";
 import { register } from "./register";
 import { logIn } from "./logIn";
 import { googleLogIn } from "./googleLogIn";
+import { validateUser } from "./validateUser";
 
 export default {
   createUser,
@@ -16,4 +17,5 @@ export default {
   register,
   logIn,
   googleLogIn,
+  validateUser
 };
