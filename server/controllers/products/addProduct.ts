@@ -14,8 +14,5 @@ export const addProduct = async (
     next(ApiError.resourceNotFound("CategoryId is not found"));
     return;
   }
-  res.status(201).json({
-    message: "Product successfully created",
-    product,
-  });
+  res.status(201).json(product);
 };

@@ -1,14 +1,12 @@
 import jwt from "jsonwebtoken";
-import { NextFunction, Request, Response } from "express";
-import usersService from "../../services/usersService";
-import { ApiError } from "../../middlewares/errors/ApiError";
-import { DecodedUser, WithAuthRequest } from "Auth";
+import { Response } from "express";
+import { WithAuthRequest } from "Auth";
 
 export async function validateUser(
   req: WithAuthRequest,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) {
+  console.log('👀 Check if token is valid')
   const token = req.body.headers.Authorization?.split(" ")[1] as string;
   let isUserValid;
   try {
@@ -17,5 +15,5 @@ export async function validateUser(
   } catch (e) {
     isUserValid = false;
   }
-  res.status(200).json(isUserValid);
+  res.status(200).json(isUserValid)
 }

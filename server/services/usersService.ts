@@ -73,7 +73,7 @@ async function logIn(email: string, password: string) {
   };
 
   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
-    expiresIn: "15s",
+    expiresIn: "1h",
   });
   return { accessToken, payload };
 }

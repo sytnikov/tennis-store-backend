@@ -14,5 +14,5 @@ export const deleteProduct = async (
     next(ApiError.resourceNotFound("Product id is not found"));
     return;
   }
-  res.status(200).json({ message: "Product deleted successfully" });
+  res.status(200).json(deletedProduct._id);
 };

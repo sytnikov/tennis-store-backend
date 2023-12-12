@@ -3,6 +3,7 @@ import { AnyZodObject, z } from "zod";
 
 export function validate(schema: AnyZodObject) {
   return async (req: Request, res: Response, next: NextFunction) => {
+    console.log('👀 Entered validate middleware')
     try {
       await schema.parseAsync({
         body: req.body,
