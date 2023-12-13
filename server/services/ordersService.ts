@@ -10,6 +10,12 @@ const getOrders = async () => {
   return await OrderRepo.find().exec();
 };
 
+const getUserOrders = async (userId: string) => {
+  const id = new mongoose.Types.ObjectId(userId);
+  console.log('id:', id)
+  return await OrderRepo.find({userId: id}).exec();
+};
+
 const getAllOrderItems = async () => {
   return await OrderItemRepo.find().exec();
 };
@@ -67,6 +73,7 @@ const removeOrder = async (orderId: string) => {
 
 export default {
   getOrders,
+  getUserOrders,
   getAllOrderItems,
   getSingleOrder,
   addOrder,

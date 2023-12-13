@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { getAllOrders } from '../controllers/orders/getAllOrders';
+import { getAllUserOrders } from '../controllers/orders/getAllUserOrders';
 import { getSingleOrder } from '../controllers/orders/getSingleOrder';
 import { deleteOrder } from '../controllers/orders/deleteOrder';
 import { addOrder } from '../controllers/orders/addOrder';
@@ -10,6 +11,7 @@ import { orderSchema } from '../schemas/orderSchema';
 const ordersRouter = Router();
 
 ordersRouter.get('/', getAllOrders);
+ordersRouter.get('/:userId', getAllUserOrders);
 ordersRouter.get('/:orderId', getSingleOrder);
 ordersRouter.post('/', validate(orderSchema), addOrder);
 ordersRouter.patch("/:orderId", validate(orderSchema), updateOrder);

@@ -65,6 +65,7 @@ async function logIn(email: string, password: string) {
     return null;
   }
   const payload = {
+    _id: foundUser._id,
     name: foundUser.name,
     email: foundUser.email,
     role: foundRole.name,
@@ -75,7 +76,10 @@ async function logIn(email: string, password: string) {
   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
     expiresIn: "1h",
   });
-  return { accessToken, payload };
+
+  const loggedInUser = {...payload, accessToken}
+  
+  return loggedInUser;
 }
 
 async function googleLogin(user: User) {

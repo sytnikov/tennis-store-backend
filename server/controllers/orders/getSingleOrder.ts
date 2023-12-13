@@ -10,7 +10,6 @@ export const getSingleOrder = async (
 ) => {
   const orderId = req.params.orderId;
   const order = await ordersService.getSingleOrder(orderId);
-
   if (!order) {
     next(ApiError.resourceNotFound('Order not found'));
     return;
