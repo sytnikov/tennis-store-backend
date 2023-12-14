@@ -13,7 +13,7 @@ export function validate(schema: AnyZodObject) {
       return next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({message: "Registration failed. Check input data"});
+        return res.status(400).json({message: "Validation failed. Check input data"});
       } else {
         res.status(500).json({ message: 'Internal Server Error' });
       }

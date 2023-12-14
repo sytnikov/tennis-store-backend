@@ -7,7 +7,7 @@ import { checkAuth } from "../middlewares/checkAuth";
 
 const checkoutRouter = express.Router()
 
-checkoutRouter.post("/", validate(newOrderSchema), createOrder)
+checkoutRouter.post("/", checkAuth, validate(newOrderSchema), createOrder)
 
 
 export default checkoutRouter
