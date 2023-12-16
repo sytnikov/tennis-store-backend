@@ -88,4 +88,4 @@ Run `npm run test` to implement all the tests.
 
 ## Deployment
 
-The back-end part is deployed using the Render service and available ![here](https://fullstack-backend-juzm.onrender.com)
+The back-end part is deployed using the Render service. Check out the products route ![here](https://fullstack-backend-juzm.onrender.com/products)
