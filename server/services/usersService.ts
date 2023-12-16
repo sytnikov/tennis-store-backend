@@ -34,13 +34,10 @@ async function deleteUser(index: string) {
   return deletedUser;
 }
 
-async function register(
-  name: string,
-  email: string,
-  password: string
-) {
+async function register(userData: CreateUserInput) {
+  const { name, email, password, roleId } = userData
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const user = new UserRepo({ name, email, password: hashedPassword });
+  const user = new UserRepo({ name, email, password: hashedPassword, roleId});
   await user.save();
   const foundRole = await RoleRepo.findById({ _id: user.roleId });
   if (!foundRole) {

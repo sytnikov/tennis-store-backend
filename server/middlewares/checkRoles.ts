@@ -5,7 +5,6 @@ import { ApiError } from "./errors/ApiError";
 
 export function checkRoles(...roles: Role[]) {
   return (req: WithAuthRequest, res: Response, next: NextFunction) => {
-    console.log('👀 Entered chekRoles middleware')
     const user = req.decoded;
     const hasMatchedRole = user && roles.includes(user.role);
     if (!hasMatchedRole) {

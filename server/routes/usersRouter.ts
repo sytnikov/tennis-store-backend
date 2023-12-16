@@ -14,8 +14,9 @@ const usersRouter = express.Router();
 
 usersRouter.get(
   "/",
-  // checkRoles(ROLE.ADMIN),
-  // checkPermission("READ"),
+  checkAuth,
+  checkRoles(ROLE.ADMIN),
+  checkPermission("READ"),
   usersController.getAllUsers
 );
 usersRouter.get(

@@ -1,23 +1,16 @@
-# Backend Assignment - REST API
+# Introduction
 
-Within this assignment the REST API for an e-commerce website is implemented according to the Entity-Relationship Diagram outlining the data model including the relationships and attributes of collections within the system.
+Back-end part of the e-commerce website selling tennis products. REST API is implemented according to the Entity-Relationship Diagram outlining the data model including the relationships and attributes of collections within the system.
 
 ## Contents
 
-- [Team](#team)
 - [Technologies](#technologies)
 - [Getting Started](#getting-started)
 - [ER Diagram](#er-diagram)
 - [Project Features](#project-features)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
-
-## Team
-
-- Shtanko Yaroslav
-- Md Shayemur Rahman
-- Amjad Shakhshir
-- Alexey Sytnikov
+- [Deployment](#deployment)
 
 ## Technologies
 
@@ -36,7 +29,7 @@ Within this assignment the REST API for an e-commerce website is implemented acc
 ## ER Diagram
 
 Within the project, the following entities are covered: users, products, categories, orders, roles, payments, and shipments.
-![er-diagram](Database-ER-diagram.png)
+![er-diagram](database_ER_diagram_tennis_products_store.png)
 
 ## Project Features
 
@@ -92,3 +85,7 @@ Below is the high-level project folder structure represented.
 The test cases for all the key Services and Controllers have been built with Jest testing library. In this porject, unit testing and integration testing approaches were used. The test requests are sent to the built mock server, not the real API.
 
 Run `npm run test` to implement all the tests.
+
+## Deployment
+
+The back-end part is deployed using the Render service and available ![here](https://fullstack-backend-juzm.onrender.com)

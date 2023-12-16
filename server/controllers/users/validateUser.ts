@@ -6,7 +6,6 @@ export async function validateUser(
   req: WithAuthRequest,
   res: Response
 ) {
-  console.log('👀 Check if token is valid')
   const token = req.body.headers.Authorization?.split(" ")[1] as string;
   let isUserValid;
   try {

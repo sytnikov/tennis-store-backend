@@ -7,8 +7,8 @@ export async function register(
   res: Response,
   next: NextFunction
 ) {
-  const { name, email, password } = req.body;
-  const user = await usersService.register(name, email, password);
+  const { name, email, password, roleId } = req.body;
+  const user = await usersService.register({name, email, password, roleId});
   if (!user) {
     next(ApiError.badRequest("User not created"));
     return;

@@ -8,14 +8,12 @@ export function checkAuth(
   _: Response,
   next: NextFunction
 ) {
-  console.log('👀 Entered chekAuth middleware')
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     next(ApiError.forbidden("Token is not found"));
     return;
   }
   try {
-    console.log('👀 Try block', )
     const decoded = jwt.verify(
       token,
       process.env.TOKEN_SECRET as string
@@ -23,7 +21,6 @@ export function checkAuth(
     req.decoded = decoded;
   }
   catch (e) {
-    console.log('👀 Catch block', )
     next(ApiError.forbidden("Token is not valid"));
     return
   }

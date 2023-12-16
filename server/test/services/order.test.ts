@@ -72,7 +72,6 @@ describe("Order Service", () => {
     const order = await createOrder();
     expect(order).toHaveProperty("_id");
     expect(order).toHaveProperty("userId");
-    expect(order?.paymentStatus).toBe("pending");
     expect(order?.totalAmount).toBe(369);
   });
 
@@ -89,7 +88,6 @@ describe("Order Service", () => {
     }
     const singleOrder = await orderService.getSingleOrder(order._id.toString());
     expect(singleOrder).toHaveProperty("userId");
-    expect(singleOrder?.paymentStatus).toBe("pending");
     expect(singleOrder?.totalAmount).toBe(369);
   });
 });

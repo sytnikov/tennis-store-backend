@@ -12,7 +12,6 @@ const getOrders = async () => {
 
 const getUserOrders = async (userId: string) => {
   const id = new mongoose.Types.ObjectId(userId);
-  console.log('id:', id)
   return await OrderRepo.find({userId: id}).exec();
 };
 
