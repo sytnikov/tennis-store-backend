@@ -28,7 +28,7 @@ Back-end part of the e-commerce website selling tennis products. REST API is imp
 
 ## ER Diagram
 
-Within the project, the following entities are covered: users, products, categories, orders, roles, payments, and shipments.
+Within the project, the following entities are covered: users, products, categories, orders, and roles.
 ![er-diagram](database_ER_diagram_tennis_products_store.png)
 
 ## Project Features
