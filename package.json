@@ -2,11 +2,10 @@
   "name": "fs16-express",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest --forceExit --coverage --detectOpenHandles --verbose false --runInBand",
     "server": "npx tsx watch ./server/server.ts",
-    "start": "node app.js"
   },
   "keywords": [],
   "author": "",

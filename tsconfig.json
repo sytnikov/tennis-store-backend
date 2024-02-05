@@ -14,5 +14,5 @@
       "*": ["node_modules/*", "server/types/*"]
     }
   },
-  "include": ["server/**/*", "app.js"]
+  "include": ["server/**/*", "api/index.ts"]
 }

@@ -1,7 +1,7 @@
 import request from "supertest";
 import connect, { MongoHelper } from "../db-helper";
 
-import app from "../../../app";
+import app from "../../../api";
 import UserRepo from "../../models/UserModel";
 import { authenticateUser } from "../auth/authenticateUser";
 

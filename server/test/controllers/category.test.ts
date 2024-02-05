@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 
 import CategoryRepo from "../../models/CategoryModel";
 import connect, { MongoHelper } from "../db-helper";
-import app from "../../../app";
+import app from "../../../api";
 import { authenticateUser } from "../auth/authenticateUser";
 import { WithAuthRequest } from "Auth";
 
