@@ -21,7 +21,7 @@ export const productBodySchema = z
       })
     ),
     stock: z.number({
-      required_error: "Price is required",
+      required_error: "Stock quantity is required",
     }),
   })
   .strict();

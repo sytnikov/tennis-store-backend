@@ -5,7 +5,7 @@ import app from "./app";
 
 const port = process.env.PORT || 5000;
 
-const mongoURL = process.env.DB_URL_COMMON as string;
+const mongoURL = process.env.DB_URL_TENNIS as string;
 mongoose.connect(mongoURL).then(() => console.log("Connected!"));
 
 app.listen(port, () => {

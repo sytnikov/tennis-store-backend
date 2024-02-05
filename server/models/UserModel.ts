@@ -17,9 +17,13 @@ const UserSchema = new Schema(
     },
     roleId: {
       type: Schema.Types.ObjectId,
-      default: "6554c883ab8e8fbcc83c643a",
+      default: "656f2ef56b3ed7947e2f0a11",
       ref: "Role",
     },
+    avatar: {
+      type: String,
+      default: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+    }
   },
   {
     versionKey: false,

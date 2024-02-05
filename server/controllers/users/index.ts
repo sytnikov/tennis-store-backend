@@ -3,9 +3,10 @@ import { getSingleUser } from "./getSingleUser";
 import { deleteUser } from "./deleteUser";
 import { updateUser } from "./updateUser";
 import { getAllUsers } from "./getAllusers";
-import { signUp } from "./signUp";
+import { register } from "./register";
 import { logIn } from "./logIn";
 import { googleLogIn } from "./googleLogIn";
+import { validateUser } from "./validateUser";
 
 export default {
   createUser,
@@ -13,7 +14,8 @@ export default {
   getSingleUser,
   deleteUser,
   updateUser,
-  signUp,
+  register,
   logIn,
   googleLogIn,
+  validateUser
 };

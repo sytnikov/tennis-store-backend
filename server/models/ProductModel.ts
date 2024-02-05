@@ -27,7 +27,8 @@ const ProductSchema = new Schema(
   },
   {
     versionKey: false,
-  }
+    timestamps: true
+  },
 );
 
 export default mongoose.model("Product", ProductSchema);

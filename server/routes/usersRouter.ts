@@ -14,7 +14,9 @@ const usersRouter = express.Router();
 
 usersRouter.get(
   "/",
-
+  checkAuth,
+  checkRoles(ROLE.ADMIN),
+  checkPermission("READ"),
   usersController.getAllUsers
 );
 usersRouter.get(
@@ -49,8 +51,9 @@ usersRouter.delete(
   checkPermission("DELETE"),
   usersController.deleteUser
 );
-usersRouter.post("/signup", emailChecker, usersController.signUp);
+usersRouter.post("/register", validate(userSchema), emailChecker, usersController.register);
 usersRouter.post("/login", usersController.logIn);
+usersRouter.post("/validate-user", usersController.validateUser);
 usersRouter.post(
   "/login-google",
   passport.authenticate("google-id-token", { session: false }),

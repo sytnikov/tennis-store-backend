@@ -21,7 +21,7 @@ const createOne = async (newProduct: CreateProductInput) => {
 };
 
 const findAll = async () => {
-  return await ProductRepo.find().exec();
+  return await ProductRepo.find().populate("categoryId").exec();
 };
 
 const removeOne = async (productId: string) => {
@@ -43,7 +43,7 @@ const updateOne = async (
 };
 
 const findOne = async (productId: string) => {
-  const product = await ProductRepo.findById(productId);
+  const product = await ProductRepo.findById(productId).populate("categoryId");
   return product;
 };
 

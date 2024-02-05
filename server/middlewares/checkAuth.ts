@@ -13,10 +13,16 @@ export function checkAuth(
     next(ApiError.forbidden("Token is not found"));
     return;
   }
-  const decoded = jwt.verify(
-    token,
-    process.env.TOKEN_SECRET as string
-  ) as DecodedUser;
-  req.decoded = decoded;
+  try {
+    const decoded = jwt.verify(
+      token,
+      process.env.TOKEN_SECRET as string
+    ) as DecodedUser;
+    req.decoded = decoded;
+  }
+  catch (e) {
+    next(ApiError.forbidden("Token is not valid"));
+    return
+  }
   next();
 }

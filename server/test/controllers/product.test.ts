@@ -18,19 +18,19 @@ describe("Product controller", () => {
   beforeEach(async () => {
     accessToken = await authenticateUser();
     const categoryInstance = new CategoryRepo({
-      name: "mobile",
-      images: ["fdfgdf"],
+      name: "Equipment",
+      images: ["test image"],
     });
     category = await categoryInstance.save();
-    const nokiaProduct = new ProductRepo({
-      name: "nokia",
-      description: "nokia description",
+    const racketProduct = new ProductRepo({
+      name: "Babolat Pure",
+      description: "Rafael Nadal's racket",
       price: 300,
       categoryId: category._id.toString(),
-      images: ["fdfgdf"],
+      images: ["test image"],
       stock: 12,
     });
-    productOne = await nokiaProduct.save();
+    productOne = await racketProduct.save();
   });
   beforeAll(async () => {
     mongoHelper = await connect();
@@ -46,39 +46,39 @@ describe("Product controller", () => {
 
   it("Should create a product", async () => {
     const product: CreateProductInput = {
-      name: "nokia",
-      description: "nokia description",
+      name: "Babolat Pure",
+      description: "Rafael Nadal's racket",
       price: 300,
       categoryId: category._id.toString(),
-      images: ["fdfgdf"],
+      images: ["test image"],
       stock: 12,
     };
     const response = await request(app)
-      .post("/products")
-      .send(product)
-      .set("Authorization", `Bearer ${accessToken}`);
-    expect(response.body.product).toHaveProperty("name");
-    expect(response.body.message).toEqual("Product successfully created");
+    .post("/products")
+    .send(product)
+    .set("Authorization", `Bearer ${accessToken}`);
+    expect(response.body).toHaveProperty("name");
+    expect(response.body.price).toEqual(300);
   });
 
   it("should return all products ", async () => {
     const response = await request(app).get("/products");
     expect(response.body.length).toEqual(1);
-    expect(response.body[0].name).toEqual("nokia");
+    expect(response.body[0].name).toEqual("Babolat Pure");
   });
 
   it("should return one product ", async () => {
     const response = await request(app).get(`/products/${productOne?._id}`);
     expect(response.statusCode).toEqual(200);
-    expect(response.body.name).toEqual("nokia");
+    expect(response.body.name).toEqual("Babolat Pure");
   });
 
   it("should delete one product ", async () => {
     const response = await request(app)
-      .delete(`/products/${productOne?._id}`)
-      .set("Authorization", `Bearer ${accessToken}`);
+    .delete(`/products/${productOne?._id}`)
+    .set("Authorization", `Bearer ${accessToken}`);
     expect(response.statusCode).toEqual(200);
-    expect(response.body.message).toEqual("Product deleted successfully");
+    expect(response.body).toEqual(productOne._id.toString());
   });
 
   it("should update one product ", async () => {
