@@ -32,20 +32,20 @@ app.get('/about', (req, res) => {
   res.send('About route 🎉 ')
 })
 
-app.use("/products", loggingMiddleware, productsRouter);
-app.use("/categories", loggingMiddleware, categoriesRouter);
-app.use("/orders", loggingMiddleware, ordersRouter);
-app.use("/users", loggingMiddleware, usersRouter);
-app.use("/checkout", loggingMiddleware, checkoutRouter);
-app.use("/items", loggingMiddleware, orderItemsRouter);
+// app.use("/products", loggingMiddleware, productsRouter);
+// app.use("/categories", loggingMiddleware, categoriesRouter);
+// app.use("/orders", loggingMiddleware, ordersRouter);
+// app.use("/users", loggingMiddleware, usersRouter);
+// app.use("/checkout", loggingMiddleware, checkoutRouter);
+// app.use("/items", loggingMiddleware, orderItemsRouter);
 
-app.use(apiErrorHandler);
-app.use(routeNotFound);
+// app.use(apiErrorHandler);
+// app.use(routeNotFound);
 
 const port = process.env.PORT || 5000;
 
-const mongoURL = process.env.DB_URL_TENNIS;
-mongoose.connect(mongoURL).then(() => console.log("Connected!"));
+// const mongoURL = process.env.DB_URL_TENNIS;
+// mongoose.connect(mongoURL).then(() => console.log("Connected!"));
 
 app.listen(port, () => {
   console.log(`👀 Server is running on localhost:${port}`);
