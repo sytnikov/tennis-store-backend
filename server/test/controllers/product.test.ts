@@ -4,7 +4,7 @@ import ProductRepo from "../../models/ProductModel";
 import CategoryRepo from "../../models/CategoryModel";
 
 import connect, { MongoHelper } from "../db-helper";
-import app from "../../../api";
+import app from "../../..";
 import { CreateProductInput, ProductDocument } from "Product";
 import { Category } from "Category";
 import { authenticateUser } from "../auth/authenticateUser";

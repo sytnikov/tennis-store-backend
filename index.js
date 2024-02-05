@@ -2,16 +2,16 @@ import express from "express";
 import passport from "passport";
 import cors from "cors"
 
-import productsRouter from "../server/routes/productsRouter";
-import categoriesRouter from "../server/routes/categoriesRouter";
-import ordersRouter from "../server/routes/ordersRouter";
-import usersRouter from "../server/routes/usersRouter";
-import checkoutRouter from "../server/routes/checkoutRouter";
-import orderItemsRouter from "../server/routes/orderItemsRouter";
-import { loggingMiddleware } from "../server/middlewares/logging";
-import { apiErrorHandler } from "../server/middlewares/apiErrorHandler";
-import { routeNotFound } from "../server/middlewares/routeNotFound";
-import { authWithGoogle } from "../server/middlewares/authWithGoogle";
+import productsRouter from "./server/routes/productsRouter";
+import categoriesRouter from "./server/routes/categoriesRouter";
+import ordersRouter from "./server/routes/ordersRouter";
+import usersRouter from "./server/routes/usersRouter";
+import checkoutRouter from "./server/routes/checkoutRouter";
+import orderItemsRouter from "./server/routes/orderItemsRouter";
+import { loggingMiddleware } from "./server/middlewares/logging";
+import { apiErrorHandler } from "./server/middlewares/apiErrorHandler";
+import { routeNotFound } from "./server/middlewares/routeNotFound";
+import { authWithGoogle } from "./server/middlewares/authWithGoogle";
 
 import mongoose from "mongoose";
 import "dotenv/config";
