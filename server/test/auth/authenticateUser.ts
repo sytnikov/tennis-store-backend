@@ -1,6 +1,6 @@
 import request from "supertest";
 import RoleRepo from "../../models/RoleModel";
-import app from "../../app";
+import app from "../../../app";
 import { CreateUserInput } from "User";
 
 export async function authenticateUser() {
