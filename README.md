@@ -21,7 +21,7 @@ Back-end part of the e-commerce website selling tennis products. REST API is imp
 
 ## Getting started
 
-- Clone the project `git clone https://github.com/sytnikov/fs16-backend-public.git`;
+- Clone the project `git clone https://github.com/sytnikov/tennis-store-backend.git`;
 - Create your `.env` file using `.env.example` file as an exaple and fill it with your credentials;
 - Use `npm install` to install all dependencies and necessary packages;
 - Run the server using `npm run sever`.
@@ -88,4 +88,4 @@ Run `npm run test` to implement all the tests.
 
 ## Deployment
 
-The back-end part is deployed using the Render service here (produts route example): https://fullstack-backend-juzm.onrender.com/products
+The back-end part is deployed using the Render service here (produts route example): https://tennis-store-backend.onrender.com/products
